@@ -14,7 +14,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `New Shoes`,
-    description: `New Shoes site powered by Gatsby and WordPress`,
+    description: `New Shoes - Especialistas em lavagem e restauracao de tenis`,
     author: `@newshoes`,
     siteUrl: `https://newshoes.com`,
   },
@@ -27,21 +27,38 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-source-wordpress`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        url: process.env.WORDPRESS_GRAPHQL_URL || `http://localhost:8080/graphql`,
+        path: `${__dirname}/src/locales`,
+        name: `locale`,
       },
     },
     {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locale`,
+        languages: [`pt-BR`, `en-US`, `es-ES`],
+        defaultLanguage: `pt-BR`,
+        siteUrl: `https://newshoes.com`,
+        generateDefaultLanguagePage: true,
+        i18nextOptions: {
+          interpolation: {
+            escapeValue: false,
+          },
+        },
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `new-shoes`,
-        short_name: `newshoes`,
+        name: `New Shoes`,
+        short_name: `NewShoes`,
         start_url: `/`,
-        background_color: `#663399`,
+        background_color: `#ffffff`,
+        theme_color: `#1CAAD9`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
       },

@@ -1,0 +1,114 @@
+.bubble-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 0;
+}
+
+.toggle-bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  border-color: transparent;
+  background-color: transparent !important;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.toggle-bubble:hover {
+  transform: scale(1.1);
+  background-color: rgba(0,0,0,0.05) !important;
+}
+
+.menu-line {
+  width: 24px;
+  height: 3px;
+  background: #000;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu-line.short {
+  width: 16px;
+  align-self: flex-end;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.toggle-bubble.open .menu-line:first-child {
+  transform: translateY(8px) rotate(45deg);
+  width: 24px;
+}
+
+.toggle-bubble.open .menu-line.short {
+  width: 24px;
+  margin-right: 0;
+  transform: translateY(0px) rotate(-45deg);
+}
+
+.bubble-menu-items {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 190;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 100px;
+  overflow-y: auto;
+}
+
+.pill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px 50px 20px;
+  align-items: center;
+}
+
+.pill-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 20px 50px;
+  min-width: 280px;
+  border-radius: 60px;
+  background: var(--pill-bg);
+  color: var(--pill-color);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  text-align: center;
+  transform: rotate(var(--item-rot));
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pill-link:hover {
+  transform: rotate(0deg) scale(1.1) !important;
+  z-index: 10;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+  .pill-link {
+    font-size: 1.8rem;
+    padding: 15px 40px;
+    min-width: 200px;
+  }
+}

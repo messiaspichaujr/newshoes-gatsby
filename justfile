@@ -1,4 +1,4 @@
-# New Shoes - Gatsby + WordPress
+# New Shoes - Gatsby + Strapi
 
 # Start all services
 up:
@@ -24,21 +24,25 @@ logs:
 logs-service service:
     docker compose logs -f {{service}}
 
+# View logs for Strapi
+logs-strapi:
+    docker compose logs -f strapi
+
+# View logs for the frontend
+logs-frontend:
+    docker compose logs -f frontend
+
 # Rebuild a specific service
 rebuild service:
     docker compose up -d --build {{service}}
-
-# Open a shell in the backend container
-backend-shell:
-    docker compose exec backend bash
 
 # Open a shell in the frontend container
 frontend-shell:
     docker compose exec frontend sh
 
-# Install WP CLI in backend and activate WPGraphQL
-wp-setup:
-    docker compose exec backend bash -c "wp plugin activate wp-graphql --allow-root"
+# Open a shell in the Strapi container
+strapi-shell:
+    docker compose exec strapi sh
 
 # Run gatsby build inside the frontend container
 build-frontend:
@@ -46,7 +50,8 @@ build-frontend:
 
 # Clean gatsby cache
 clean-frontend:
-    docker compose exec frontend npm run clean
+    docker compose exec frontend rm -rf /app/.cache /app/public
+    docker compose restart frontend
 
 # Show running containers
 ps:
