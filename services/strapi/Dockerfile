@@ -9,6 +9,8 @@ RUN npm install
 
 COPY . .
 
+RUN mkdir -p /app/public/uploads
+
 EXPOSE 1337
 
 ENV NODE_OPTIONS=--max-old-space-size=400
