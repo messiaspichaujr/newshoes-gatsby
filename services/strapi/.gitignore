@@ -125,7 +125,8 @@ coverage
 license.txt
 exports
 .strapi
-dist
-build
+# dist and build are committed for production deploy (pre-built)
+# dist
+# build
 .strapi-updater.json
 .strapi-cloud.json

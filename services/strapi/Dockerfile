@@ -5,10 +5,9 @@ RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install
+RUN npm install --production
 
 COPY . .
-RUN NODE_OPTIONS=--max-old-space-size=400 npm run build
 
 EXPOSE 1337
 

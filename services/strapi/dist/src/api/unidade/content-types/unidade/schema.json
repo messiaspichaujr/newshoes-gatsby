@@ -1,0 +1,108 @@
+{
+    "kind": "collectionType",
+    "collectionName": "unidades",
+    "info": {
+        "singularName": "unidade",
+        "pluralName": "unidades",
+        "displayName": "📍 Unidades",
+        "description": "Cadastro de todas as franquias New Shoes. Cada registro e uma loja."
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {
+        "i18n": {
+            "localized": true
+        }
+    },
+    "attributes": {
+        "nome": {
+            "type": "string",
+            "required": true,
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Nome da loja exibido no site (ex: Curitiba - Batel)"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "nome",
+            "description": "Identificador unico da URL — gerado automaticamente a partir do nome"
+        },
+        "endereco": {
+            "type": "text",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Endereco completo da loja"
+        },
+        "whatsapp": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Numero do WhatsApp formatado para exibicao (ex: (41) 99879-8214)"
+        },
+        "whatsapp_sem_tracos": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Numero do WhatsApp so com digitos para o link (ex: 41998798214)"
+        },
+        "instagram": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Perfil ou link do Instagram da unidade (ex: @newshoes.batel)"
+        },
+        "facebook": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Link do Facebook da unidade (opcional)"
+        },
+        "tiktok": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Link do TikTok da unidade (opcional)"
+        },
+        "estado": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Sigla do estado (ex: PR, SP, SC)"
+        },
+        "cidade": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Nome da cidade da unidade"
+        },
+        "imagem_url": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "URL da foto da fachada da loja (cole o link da imagem aqui)"
+        },
+        "plano_basic_preco": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Preco do Plano Basic (ex: R$ 59,90)"
+        },
+        "plano_pro_preco": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Preco do Plano Pro (ex: R$ 69,90)"
+        },
+        "plano_pro_plus_preco": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Preco do Plano Pro+ (ex: R$ 79,90)"
+        },
+        "express_preco": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Preco do Servico Express (ex: R$ 79,90)"
+        },
+        "express_plus_preco": {
+            "type": "string",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Preco do Servico Express+ (ex: R$ 99,90)"
+        },
+        "reparos": {
+            "type": "component",
+            "repeatable": true,
+            "component": "unidade.reparo-item",
+            "pluginOptions": { "i18n": { "localized": false } },
+            "description": "Lista de pequenos reparos com precos desta unidade. Se vazio, usa a tabela padrao da rede."
+        }
+    }
+}

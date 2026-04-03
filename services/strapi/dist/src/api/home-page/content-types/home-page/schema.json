@@ -1,0 +1,103 @@
+{
+    "kind": "singleType",
+    "collectionName": "home_pages",
+    "info": {
+        "singularName": "home-page",
+        "pluralName": "home-pages",
+        "displayName": "🏠 Pagina Inicial",
+        "description": "Edite aqui os textos da pagina inicial do site"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "welcome_banner": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Texto do banner preto no topo do site (ex: WELCOME TO NEW SHOES)"
+        },
+        "hero_title": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Titulo principal da tela de entrada (ex: NEW SHOES)"
+        },
+        "benefits_title": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Titulo da secao de vantagens (ex: POR QUE A NEW SHOES?)"
+        },
+        "benefits_subtitle": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Subtitulo abaixo do titulo de vantagens"
+        },
+        "benefits_items": {
+            "type": "component",
+            "repeatable": true,
+            "component": "home.benefit-item",
+            "description": "Lista de vantagens exibidas nos cards (maximo 6)"
+        },
+        "benefits_investment_label": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Rotulo acima do valor de investimento (ex: Investimento Inicial)"
+        },
+        "benefits_investment_amount": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Valor em destaque do investimento (ex: 210k)"
+        },
+        "benefits_investment_estimate": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Texto complementar do investimento (ex: a R$ 240k Estimado)"
+        },
+        "benefits_structure_title": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Titulo do bloco de estrutura e suporte"
+        },
+        "benefits_structure_items": {
+            "type": "component",
+            "repeatable": true,
+            "component": "home.structure-item",
+            "description": "Itens da lista de estrutura e suporte (maximo 3)"
+        },
+        "brand_title_prefix": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Primeira parte do titulo da historia da marca (ex: A EXPERIENCIA)"
+        },
+        "brand_title_highlight": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Parte em azul do titulo da historia da marca (ex: NEW SHOES)"
+        },
+        "brand_paragraph": {
+            "type": "text",
+            "pluginOptions": {},
+            "description": "Paragrafo principal sobre a historia da marca"
+        },
+        "brand_cta": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Texto do botao de historia da marca (ex: CONHECA NOSSA HISTORIA)"
+        },
+        "footer_description": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Descricao curta exibida no rodape do site"
+        },
+        "footer_instagram_url": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Link completo do Instagram (ex: https://instagram.com/newshoes)"
+        },
+        "footer_whatsapp": {
+            "type": "string",
+            "pluginOptions": {},
+            "description": "Numero do WhatsApp com codigo do pais, sem espacos (ex: 5547999999999)"
+        }
+    }
+}
