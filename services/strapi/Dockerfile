@@ -5,7 +5,7 @@ RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install --production
+RUN npm install
 
 COPY . .
 
