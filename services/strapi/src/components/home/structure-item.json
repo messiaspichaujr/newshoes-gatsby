@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_home_structure_items",
+  "info": {
+    "displayName": "Structure Item",
+    "icon": "check"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

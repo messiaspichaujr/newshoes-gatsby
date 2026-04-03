@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import FoamTransition from './FoamTransition';
 
-const Hero = () => {
+const Hero = ({ home = {} }) => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
 
@@ -29,7 +29,7 @@ const Hero = () => {
         );
       })()}
       <h1 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '12vw', fontWeight: '900', color: 'rgba(0,0,0,0.04)', zIndex: 0, pointerEvents: 'none', whiteSpace: 'nowrap', fontFamily: 'Space Grotesk, sans-serif' }}>
-        {t('hero.title')}
+        {home.hero_title || t('hero.title')}
       </h1>
       <FoamTransition />
     </section>

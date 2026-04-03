@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_unidade_reparo_items",
+  "info": {
+    "displayName": "Item de Reparo",
+    "icon": "scissors"
+  },
+  "options": {},
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true,
+      "description": "Nome do servico de reparo (ex: Remocao de Bolor)"
+    },
+    "preco": {
+      "type": "string",
+      "required": true,
+      "description": "Preco do reparo (ex: R$ 14,90)"
+    },
+    "observacao": {
+      "type": "string",
+      "description": "Observacao opcional (ex: por sessao, a partir)"
+    }
+  }
+}

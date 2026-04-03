@@ -8,6 +8,7 @@ import BrandStory from '../components/BrandStory'
 import CleaningGame from '../components/CleaningGame'
 import FranchiseLocator from '../components/FranchiseLocator'
 import FranchiseForm from '../components/FranchiseForm'
+import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import Seo from '../components/seo'
 import '../css/global.css'
@@ -17,21 +18,24 @@ const IndexPage = ({ data, pageContext }) => {
   const { t } = useTranslation();
   const locale = pageContext.language || 'pt-BR';
   const allUnidades = data.allStrapiUnidade?.nodes || [];
-  const unidades = allUnidades.filter(u => u.locale === locale);
+  const ptUnidades = allUnidades.filter(u => u.locale === 'pt-BR');
+  const unidades = ptUnidades.length > 0 ? ptUnidades : allUnidades;
+  const home = locale === 'pt-BR' ? (data.strapiHomePage || {}) : {};
 
   return (
     <div className="app-wrapper">
       <div style={{ backgroundColor: '#000', color: '#fff', textAlign: 'center', padding: '8px', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px' }}>
-        {t('welcome_banner')}
+        {home.welcome_banner || t('welcome_banner')}
       </div>
       <Navbar />
-      <Hero />
-      <Benefits />
-      <BrandStory />
+      <Hero home={home} />
+      <Benefits home={home} />
+      <BrandStory home={home} />
       <CleaningGame />
       <FranchiseLocator unidades={unidades} />
       <FranchiseForm />
-      <Footer />
+      <ContactForm />
+      <Footer home={home} />
     </div>
   );
 }
@@ -60,8 +64,28 @@ export const query = graphql`
         whatsapp
         estado
         cidade
+        imagem_url
         locale
       }
+    }
+    strapiHomePage {
+      welcome_banner
+      hero_title
+      benefits_title
+      benefits_subtitle
+      benefits_items
+      benefits_investment_label
+      benefits_investment_amount
+      benefits_investment_estimate
+      benefits_structure_title
+      benefits_structure_items
+      brand_title_prefix
+      brand_title_highlight
+      brand_paragraph
+      brand_cta
+      footer_description
+      footer_instagram_url
+      footer_whatsapp
     }
   }
 `;

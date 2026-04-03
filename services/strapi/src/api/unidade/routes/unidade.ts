@@ -1,5 +1,3 @@
-'use strict';
+import { factories } from '@strapi/strapi';
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::unidade.unidade');
+export default factories.createCoreRouter('api::unidade.unidade');

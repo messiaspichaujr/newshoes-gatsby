@@ -1,9 +1,19 @@
 import React from 'react';
-import { Award, Headphones, BookOpen, Layers, Cpu, TrendingUp, Map, Layout, LayoutDashboard, CheckCircle } from 'lucide-react';
+import { Award, Headphones, BookOpen, Layers, Cpu, TrendingUp, Map, Layout, LayoutDashboard, CheckCircle, Star, Shield, Zap, Heart, Globe, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
-const Benefits = () => {
+const ICON_MAP = {
+  Award, Headphones, BookOpen, Layers, Cpu, TrendingUp,
+  Star, Shield, Zap, Heart, Globe, Users, Map, Layout, LayoutDashboard,
+};
+
+const DynamicIcon = ({ name, size = 32 }) => {
+  const Icon = ICON_MAP[name] || Award;
+  return <Icon size={size} />;
+};
+
+const Benefits = ({ home = {} }) => {
   const { t } = useTranslation();
 
   const container = {
@@ -21,14 +31,21 @@ const Benefits = () => {
     show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 50 } }
   };
 
-  const items = [
-    { icon: <Award size={32} />, title: t('benefits.item1.title'), desc: t('benefits.item1.desc') },
-    { icon: <Headphones size={32} />, title: t('benefits.item2.title'), desc: t('benefits.item2.desc') },
-    { icon: <BookOpen size={32} />, title: t('benefits.item3.title'), desc: t('benefits.item3.desc') },
-    { icon: <Layers size={32} />, title: t('benefits.item4.title'), desc: t('benefits.item4.desc') },
-    { icon: <Cpu size={32} />, title: t('benefits.item5.title'), desc: t('benefits.item5.desc') },
-    { icon: <TrendingUp size={32} />, title: t('benefits.item6.title'), desc: t('benefits.item6.desc') },
-  ];
+  const strapiItems = home.benefits_items;
+  const items = strapiItems && strapiItems.length > 0
+    ? strapiItems.map(item => ({
+        icon: <DynamicIcon name={item.icon_name} size={32} />,
+        title: item.title,
+        desc: item.description,
+      }))
+    : [
+        { icon: <Award size={32} />, title: t('benefits.item1.title'), desc: t('benefits.item1.desc') },
+        { icon: <Headphones size={32} />, title: t('benefits.item2.title'), desc: t('benefits.item2.desc') },
+        { icon: <BookOpen size={32} />, title: t('benefits.item3.title'), desc: t('benefits.item3.desc') },
+        { icon: <Layers size={32} />, title: t('benefits.item4.title'), desc: t('benefits.item4.desc') },
+        { icon: <Cpu size={32} />, title: t('benefits.item5.title'), desc: t('benefits.item5.desc') },
+        { icon: <TrendingUp size={32} />, title: t('benefits.item6.title'), desc: t('benefits.item6.desc') },
+      ];
 
   return (
     <section id="benefits" style={{ padding: '120px 20px', backgroundColor: '#f5f5f5', position: 'relative' }}>
@@ -41,9 +58,11 @@ const Benefits = () => {
           style={{ textAlign: 'center', marginBottom: '80px' }}
         >
           <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '48px', fontWeight: '700', marginBottom: '10px' }}>
-            {t('benefits.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('benefits.title_highlight')}</span>
+            {home.benefits_title
+              ? home.benefits_title
+              : <>{t('benefits.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('benefits.title_highlight')}</span></>}
           </h2>
-          <p style={{ color: '#666', fontSize: '18px' }}>{t('benefits.subtitle')}</p>
+          <p style={{ color: '#666', fontSize: '18px' }}>{home.benefits_subtitle || t('benefits.subtitle')}</p>
         </motion.div>
 
         <motion.div
@@ -103,31 +122,36 @@ const Benefits = () => {
           <div style={{ position: 'absolute', top: '-50%', left: '-20%', width: '500px', height: '500px', background: '#1CAAD9', filter: 'blur(150px)', opacity: 0.2, borderRadius: '50%' }} />
 
           <div style={{ flex: 1, minWidth: '300px', zIndex: 1 }}>
-            <h3 style={{ fontFamily: 'Space Grotesk', fontSize: '36px', marginBottom: '30px' }}>{t('benefits.structure_title')}</h3>
+            <h3 style={{ fontFamily: 'Space Grotesk', fontSize: '36px', marginBottom: '30px' }}>
+              {home.benefits_structure_title || t('benefits.structure_title')}
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {[
-                { icon: <Map />, text: t('benefits.structure1') },
-                { icon: <Layout />, text: t('benefits.structure2') },
-                { icon: <LayoutDashboard />, text: t('benefits.structure3') }
-              ].map((it, i) => (
+              {(home.benefits_structure_items && home.benefits_structure_items.length > 0
+                ? home.benefits_structure_items.map(s => s.text)
+                : [t('benefits.structure1'), t('benefits.structure2'), t('benefits.structure3')]
+              ).map((text, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   <CheckCircle color="#1CAAD9" size={20} />
-                  <span style={{ fontSize: '18px' }}>{it.text}</span>
+                  <span style={{ fontSize: '18px' }}>{text}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div style={{ textAlign: 'right', minWidth: '300px', zIndex: 1 }}>
-            <p style={{ fontSize: '14px', color: '#888', letterSpacing: '2px', textTransform: 'uppercase' }}>{t('benefits.investment_label')}</p>
+            <p style={{ fontSize: '14px', color: '#888', letterSpacing: '2px', textTransform: 'uppercase' }}>
+              {home.benefits_investment_label || t('benefits.investment_label')}
+            </p>
             <motion.h2
               animate={{ scale: [1, 1.02, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
               style={{ fontFamily: 'Space Grotesk', fontSize: '64px', color: '#1CAAD9', fontWeight: '700', margin: '10px 0' }}
             >
-              {t('benefits.investment_amount')}
+              {home.benefits_investment_amount || t('benefits.investment_amount')}
             </motion.h2>
-            <p style={{ fontSize: '16px', color: '#666' }}>{t('benefits.investment_estimate')}</p>
+            <p style={{ fontSize: '16px', color: '#666' }}>
+              {home.benefits_investment_estimate || t('benefits.investment_estimate')}
+            </p>
           </div>
         </motion.div>
 

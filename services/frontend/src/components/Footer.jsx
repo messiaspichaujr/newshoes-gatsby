@@ -28,7 +28,7 @@ const Bubble = ({ delay, size, left }) => (
   />
 );
 
-const Footer = () => {
+const Footer = ({ home = {} }) => {
   const { t } = useTranslation();
 
   const styles = {
@@ -139,31 +139,29 @@ const Footer = () => {
           <div style={styles.brandColumn}>
             <span style={styles.logoText}>{t('footer.logo_text')}</span>
             <p style={styles.description}>
-              {t('footer.description')}
+              {home.footer_description || t('footer.description')}
             </p>
           </div>
 
-          <div style={styles.linksGroup}>
-            <div style={styles.linksColumn}>
-              <span style={styles.columnTitle}>{t('footer.support')}</span>
-              <a href="#" style={styles.link}>{t('footer.service_guarantee')}</a>
-              <a href="#" style={styles.link}>{t('footer.how_it_works')}</a>
-              <a href="#" style={styles.link}>{t('footer.contact')}</a>
-            </div>
-
-            <div style={styles.linksColumn}>
-              <span style={styles.columnTitle}>{t('footer.company')}</span>
-              <a href="#" style={styles.link}>{t('footer.about_us')}</a>
-              <a href="#franchise" style={styles.link}>{t('footer.franchises')}</a>
-            </div>
-          </div>
         </div>
 
         <div style={styles.bottomBar}>
           <span>{t('footer.copyright')}</span>
           <div style={{ display: 'flex', gap: '20px', fontWeight: 'bold' }}>
-            <span style={{ cursor: 'pointer' }}>{t('footer.instagram')}</span>
-            <span style={{ cursor: 'pointer' }}>{t('footer.whatsapp')}</span>
+            <a
+              href={home.footer_instagram_url || 'https://instagram.com'}
+              target="_blank" rel="noopener noreferrer"
+              style={{ color: '#fff', textDecoration: 'none', cursor: 'pointer' }}
+            >
+              {t('footer.instagram')}
+            </a>
+            <a
+              href={home.footer_whatsapp ? `https://wa.me/${home.footer_whatsapp.replace(/\D/g, '')}` : '#'}
+              target="_blank" rel="noopener noreferrer"
+              style={{ color: '#fff', textDecoration: 'none', cursor: 'pointer' }}
+            >
+              {t('footer.whatsapp')}
+            </a>
           </div>
         </div>
 

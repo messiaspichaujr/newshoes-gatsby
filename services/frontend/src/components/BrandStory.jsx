@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Trans, useTranslation } from 'react-i18next';
 
-const BrandStory = () => {
+const BrandStory = ({ home = {} }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -46,12 +46,15 @@ const BrandStory = () => {
         }}
       >
         <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '32px', marginBottom: '20px' }}>
-          {t('brand.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('brand.title_highlight')}</span>
+          {home.brand_title_prefix || t('brand.title_prefix')}{' '}
+          <span style={{ color: '#1CAAD9' }}>{home.brand_title_highlight || t('brand.title_highlight')}</span>
         </h2>
         <p style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '40px', fontWeight: '300' }}>
-          <Trans i18nKey="brand.paragraph">
-            Placeholder text <strong style={{ color: '#1CAAD9' }}>17 years of experience</strong> more text.
-          </Trans>
+          {home.brand_paragraph || (
+            <Trans i18nKey="brand.paragraph">
+              Placeholder text <strong style={{ color: '#1CAAD9' }}>17 years of experience</strong> more text.
+            </Trans>
+          )}
         </p>
 
         <motion.button
@@ -69,7 +72,7 @@ const BrandStory = () => {
             letterSpacing: '1px'
           }}
         >
-          {t('brand.cta')}
+          {home.brand_cta || t('brand.cta')}
         </motion.button>
       </motion.div>
     </section>

@@ -10,11 +10,12 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   const menuItems = [
-    { label: t('nav.home'), href: '#', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } },
-    { label: t('nav.benefits'), href: '#benefits', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
-    { label: t('nav.brand'), href: '#brand', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#ffffff' } },
-    { label: t('nav.locations'), href: '#locator', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
-    { label: t('nav.franchise'), href: '#franchise', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } }
+    { label: t('nav.home'), href: '/', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } },
+    { label: t('nav.benefits'), href: '/#benefits', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
+    { label: t('nav.brand'), href: '/#brand', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#ffffff' } },
+    { label: t('nav.locations'), href: '/#locator', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
+    { label: t('nav.franchise'), href: '/#franchise', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } },
+    { label: t('nav.sac'), href: '/#sac', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } }
   ];
 
   const styles = {

@@ -1,0 +1,79 @@
+services:
+
+  traefik:
+    image: traefik:v3.0
+    container_name: newshoes-traefik
+    restart: unless-stopped
+    command:
+      - --api.dashboard=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_letsencrypt:/letsencrypt
+
+  frontend:
+    container_name: newshoes-frontend
+    build:
+      context: ./services/frontend
+      dockerfile: Dockerfile.prod
+      args:
+        STRAPI_API_URL: http://strapi:1337
+        STRAPI_TOKEN: ${STRAPI_GATSBY_TOKEN}
+    restart: unless-stopped
+    depends_on:
+      strapi:
+        condition: service_healthy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.rule=Host(`gatsby.${DOMAIN}`)
+      - traefik.http.routers.frontend.entrypoints=websecure
+      - traefik.http.routers.frontend.tls.certresolver=letsencrypt
+      - traefik.http.services.frontend.loadbalancer.server.port=8000
+
+  strapi:
+    container_name: newshoes-strapi
+    build: ./services/strapi
+    restart: unless-stopped
+    environment:
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: ${STRAPI_APP_KEYS}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${STRAPI_JWT_SECRET}
+      STRAPI_GATSBY_TOKEN: ${STRAPI_GATSBY_TOKEN}
+      STRAPI_ADMIN_EMAIL: ${STRAPI_ADMIN_EMAIL}
+      STRAPI_ADMIN_PASSWORD: ${STRAPI_ADMIN_PASSWORD}
+      STRAPI_ADMIN_FIRSTNAME: ${STRAPI_ADMIN_FIRSTNAME:-Admin}
+      STRAPI_ADMIN_LASTNAME: ${STRAPI_ADMIN_LASTNAME:-NewShoes}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://0.0.0.0:1337/admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    volumes:
+      - strapi_data:/app/.tmp
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.strapi.rule=Host(`admin.${DOMAIN}`)
+      - traefik.http.routers.strapi.entrypoints=websecure
+      - traefik.http.routers.strapi.tls.certresolver=letsencrypt
+      - traefik.http.services.strapi.loadbalancer.server.port=1337
+
+volumes:
+  strapi_data:
+  traefik_letsencrypt:

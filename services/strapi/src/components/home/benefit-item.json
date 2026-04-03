@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_home_benefit_items",
+  "info": {
+    "displayName": "Benefit Item",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "icon_name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

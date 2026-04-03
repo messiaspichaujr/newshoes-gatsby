@@ -54,6 +54,22 @@ docker compose restart frontend
 
 **i18n:** `gatsby-plugin-react-i18next` with 3 locales: `pt-BR` (default), `en-US`, `es-ES`. Translation files at `src/locales/{locale}/translation.json`. Strapi content type has i18n enabled (locale field on unidades).
 
+## i18n Rules — MANDATORY
+
+**Every user-facing string in any component MUST use `t('key')`.** Never write hardcoded Portuguese (or any language) text in JSX. This includes:
+- Labels, placeholders, button text, error messages, success messages, section titles
+- Any string a user reads on screen
+
+**When adding any new string to a component:**
+1. Add a translation key to ALL THREE locale files: `pt-BR/translation.json`, `en-US/translation.json`, `es-ES/translation.json`
+2. Use `t('your.key')` in the component — never the raw string
+
+**When creating a new component:**
+- Always `import { useTranslation } from 'react-i18next'` and `const { t } = useTranslation()`
+- Zero hardcoded user-facing strings allowed
+
+Strapi runs locally at `http://localhost:1337`. Gatsby runs at `http://localhost:8000`. Locale pages: `/en-US/`, `/es-ES/`.
+
 ## i18n Locale Convention
 
 **All locales must use the `ll-CC` pattern** (ISO 639-1 language + ISO 3166-1 country): `pt-BR`, `en-US`, `es-ES`, `es-GT`, etc. Never use bare language codes like `en`, `pt`, or `es`.
