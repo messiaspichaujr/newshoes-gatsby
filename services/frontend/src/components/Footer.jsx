@@ -149,7 +149,7 @@ const Footer = ({ home = {} }) => {
           <span>{t('footer.copyright')}</span>
           <div style={{ display: 'flex', gap: '20px', fontWeight: 'bold' }}>
             <a
-              href={home.footer_instagram_url || 'https://instagram.com'}
+              href={home.footer_instagram_url || 'https://www.instagram.com/lavanderianewshoes/'}
               target="_blank" rel="noopener noreferrer"
               style={{ color: '#fff', textDecoration: 'none', cursor: 'pointer' }}
             >
