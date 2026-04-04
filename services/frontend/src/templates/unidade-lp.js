@@ -76,6 +76,10 @@ const UnidadeLpPage = ({ data }) => {
   const [floatingVisible, setFloatingVisible] = useState(false)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
     const onScroll = () => setFloatingVisible(window.scrollY > 400)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)

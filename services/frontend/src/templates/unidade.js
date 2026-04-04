@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 import { MapPin, Phone, Instagram, Facebook, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react'
@@ -73,6 +73,10 @@ const UnidadePage = ({ data }) => {
   const repairs = u.reparos?.length > 0 ? u.reparos : DEFAULT_REPAIRS
   const expressPrice = u.express_preco || DEFAULT_PRICES.express
   const expressPlusPrice = u.express_plus_preco || DEFAULT_PRICES.express_plus
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="app-wrapper">
