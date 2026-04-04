@@ -50,7 +50,7 @@ const Navbar = ({ whatsapp } = {}) => {
             style={{ position: 'relative', top: 'auto', left: 'auto', right: 'auto', padding: 0, pointerEvents: 'auto', zIndex: 201 }} />
         </div>
         <div style={{ width: '180px', display: 'flex', justifyContent: 'center' }}>
-          <img src={logoImg} alt="New Shoes Logo" style={{ width: '100%', objectFit: 'contain' }} />
+          <a href="/"><img src={logoImg} alt="New Shoes Logo" style={{ width: '100%', objectFit: 'contain', display: 'block' }} /></a>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <LanguageSwitcher />
