@@ -7,7 +7,10 @@ export const onClientEntry = () => {
   }
 }
 
-export const shouldUpdateScroll = () => {
-  window.scrollTo(0, 0)
-  return false
+export const onRouteUpdate = () => {
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  })
 }
+
+export const shouldUpdateScroll = () => false
