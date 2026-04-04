@@ -87,7 +87,7 @@ const UnidadeLpPage = ({ data }) => {
 
   return (
     <div className="app-wrapper">
-      <Navbar />
+      <Navbar whatsapp={u.whatsapp_sem_tracos || u.whatsapp} />
 
       {/* ── Hero ── */}
       <section style={{

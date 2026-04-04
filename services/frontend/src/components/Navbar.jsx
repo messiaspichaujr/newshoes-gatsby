@@ -6,7 +6,11 @@ import { motion } from 'framer-motion';
 import BubbleMenu from './BubbleMenu';
 import LanguageSwitcher from './LanguageSwitcher';
 
-const Navbar = () => {
+const DEFAULT_WHATSAPP = '5547991180109'
+
+const Navbar = ({ whatsapp } = {}) => {
+  const waNumber = whatsapp ? whatsapp.replace(/\D/g, '').replace(/^0/, '55') : DEFAULT_WHATSAPP
+  const waHref = `https://wa.me/${waNumber}`
   const { t } = useTranslation();
 
   const menuItems = [
@@ -51,7 +55,7 @@ const Navbar = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <LanguageSwitcher />
           <AnimatedIcon href="https://www.instagram.com/lavanderianewshoes/"><Instagram size={24} strokeWidth={1.5} /></AnimatedIcon>
-          <AnimatedIcon href="https://wa.me/5547999999999"><WhatsAppIcon size={24} /></AnimatedIcon>
+          <AnimatedIcon href={waHref}><WhatsAppIcon size={24} /></AnimatedIcon>
         </div>
       </motion.div>
     </nav>
