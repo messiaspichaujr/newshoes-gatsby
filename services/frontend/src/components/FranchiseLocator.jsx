@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { MapPin, Phone, ArrowRight, Search, X, ChevronDown, Building2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -99,7 +99,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
     setShowSuggestions(false);
 
     if (suggestion.type === 'franquia') {
-      window.location.href = `/unidades/${suggestion.slug}`;
+      navigate(`/unidades/${suggestion.slug}`);
       return;
     }
 
