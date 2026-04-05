@@ -11,7 +11,7 @@ const Hero = ({ home = {} }) => {
   }, []);
 
   return (
-    <section style={{ height: '100vh', width: '100%', backgroundColor: '#f5f5f5', position: 'relative', overflow: 'hidden', paddingTop: '140px' }}>
+    <section style={{ height: '100vh', minHeight: '500px', width: '100%', backgroundColor: '#f5f5f5', position: 'relative', overflow: 'hidden', paddingTop: 'clamp(80px, 14vw, 140px)' }}>
       {mounted && typeof window !== 'undefined' && (() => {
         const { Canvas } = require('@react-three/fiber');
         const { Environment, PresentationControls } = require('@react-three/drei');

@@ -169,7 +169,7 @@ const UnidadePage = ({ data }) => {
         </div>
       </section>
 
-      <section style={{ backgroundColor: '#F5F5F7', padding: '60px 20px 100px' }}>
+      <section style={{ backgroundColor: '#F5F5F7', padding: 'clamp(32px, 6vw, 60px) clamp(16px, 3vw, 20px) clamp(60px, 10vw, 100px)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
           {/* Back link */}
@@ -183,7 +183,7 @@ const UnidadePage = ({ data }) => {
 
           {/* Contact card */}
           <div style={{
-            backgroundColor: '#fff', borderRadius: '24px', padding: '40px',
+            backgroundColor: '#fff', borderRadius: '24px', padding: 'clamp(20px, 4vw, 40px)',
             boxShadow: '0 4px 20px rgba(0,0,0,0.05)', marginBottom: '32px',
           }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', alignItems: 'flex-start' }}>

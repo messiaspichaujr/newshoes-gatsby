@@ -43,3 +43,14 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
+/* ─── Responsive helpers ─── */
+@media (max-width: 480px) {
+  .hide-on-mobile { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  .bubble-menu-items { padding-top: 80px; }
+  .pill-list { gap: 14px; padding: 0 16px 40px; }
+  .pill-link { font-size: 1.4rem; padding: 14px 32px; min-width: 220px; }
+}

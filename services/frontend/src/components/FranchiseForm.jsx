@@ -28,14 +28,14 @@ const FranchiseForm = () => {
   }
 
   return (
-    <section id="franchise" style={{ backgroundColor: '#0a0a0a', color: '#fff', padding: '120px 20px', position: 'relative' }}>
+    <section id="franchise" style={{ backgroundColor: '#0a0a0a', color: '#fff', padding: 'clamp(60px, 10vw, 120px) 20px', position: 'relative' }}>
 
       <div style={{ position: 'absolute', right: 0, top: '20%', width: '300px', height: '600px', background: 'linear-gradient(to bottom, #1CAAD9, transparent)', opacity: 0.05, filter: 'blur(80px)' }} />
 
       <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '48px', lineHeight: '1.2', marginBottom: '20px' }}>
+          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(28px, 5vw, 48px)', lineHeight: '1.2', marginBottom: '20px' }}>
             {t('franchise.title_prefix')} <br />
             <span style={{ color: '#1CAAD9' }}>{t('franchise.title_highlight')}</span>
           </h2>
@@ -43,7 +43,7 @@ const FranchiseForm = () => {
         </div>
 
         <form style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '25px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '20px' }}>
             <input type="text" placeholder={t('franchise.name')} style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
             <input type="text" placeholder={t('franchise.lastname')} style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
           </div>
@@ -51,7 +51,7 @@ const FranchiseForm = () => {
           <input type="email" placeholder={t('franchise.email')} style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
           <input type="tel" placeholder={t('franchise.whatsapp')} style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '25px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '20px' }}>
             <input type="text" placeholder={t('franchise.city')} style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
             <input type="text" placeholder={t('franchise.state')} style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
           </div>

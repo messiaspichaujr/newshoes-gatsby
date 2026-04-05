@@ -45,15 +45,15 @@ const ContactForm = () => {
   };
 
   return (
-    <section style={{ padding: '80px 20px', background: 'linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%)' }} id="sac">
+    <section style={{ padding: 'clamp(40px, 8vw, 80px) 20px', background: 'linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%)' }} id="sac">
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontSize: '42px', fontWeight: '700', color: '#000', margin: '0 0 10px 0' }}>{t('contact.title')}</h2>
-          <p style={{ fontSize: '18px', color: '#666', margin: '0' }}>{t('contact.subtitle')}</p>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 6vw, 60px)' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 5vw, 42px)', fontWeight: '700', color: '#000', margin: '0 0 10px 0' }}>{t('contact.title')}</h2>
+          <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#666', margin: '0' }}>{t('contact.subtitle')}</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start' }}>
-          <form onSubmit={handleSubmit} style={{ background: 'white', padding: '40px', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '32px', alignItems: 'start' }}>
+          <form onSubmit={handleSubmit} style={{ background: 'white', padding: 'clamp(20px, 4vw, 40px)', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)' }}>
             {submitted && (
               <div style={{ padding: '16px', borderRadius: '8px', marginBottom: '20px', fontWeight: '500', fontSize: '14px', background: '#d4edda', color: '#155724', border: '1px solid #c3e6cb' }}>
                 {t('contact.success')}
@@ -66,7 +66,7 @@ const ContactForm = () => {
               </div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '16px', marginBottom: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <label htmlFor="nome" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.name')} *</label>
                 <input
@@ -88,7 +88,7 @@ const ContactForm = () => {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '16px', marginBottom: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <label htmlFor="telefone" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.phone')}</label>
                 <input
@@ -128,7 +128,7 @@ const ContactForm = () => {
             </button>
           </form>
 
-          <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '40px', borderRadius: '16px', color: 'white' }}>
+          <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: 'clamp(20px, 4vw, 40px)', borderRadius: '16px', color: 'white' }}>
             <h3 style={{ fontSize: '24px', fontWeight: '700', margin: '0 0 30px 0' }}>{t('contact.side.title')}</h3>
             <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
               <span style={{ fontSize: '28px', minWidth: '40px', textAlign: 'center' }}>📧</span>

@@ -45,7 +45,7 @@ const Footer = ({ home = {} }) => {
     container: {
       width: '100%',
       maxWidth: '1400px',
-      padding: '80px 40px 40px 40px',
+      padding: 'clamp(40px, 8vw, 80px) clamp(16px, 4vw, 40px) 40px',
       display: 'flex',
       flexDirection: 'column',
       color: '#fff',
@@ -107,7 +107,9 @@ const Footer = ({ home = {} }) => {
       borderTop: '1px solid #222',
       paddingTop: '30px',
       display: 'flex',
+      flexWrap: 'wrap',
       justifyContent: 'space-between',
+      gap: '12px',
       color: '#666',
       fontSize: '12px',
       alignItems: 'center'

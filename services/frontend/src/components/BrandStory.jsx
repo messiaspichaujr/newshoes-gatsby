@@ -35,7 +35,7 @@ const BrandStory = ({ home = {} }) => {
         style={{
           maxWidth: '800px',
           margin: '20px',
-          padding: '60px',
+          padding: 'clamp(24px, 5vw, 60px)',
           background: 'rgba(255, 255, 255, 0.1)',
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255,255,255,0.2)',
@@ -45,11 +45,11 @@ const BrandStory = ({ home = {} }) => {
           zIndex: 1
         }}
       >
-        <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '32px', marginBottom: '20px' }}>
+        <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(20px, 4vw, 32px)', marginBottom: '20px' }}>
           {home.brand_title_prefix || t('brand.title_prefix')}{' '}
           <span style={{ color: '#1CAAD9' }}>{home.brand_title_highlight || t('brand.title_highlight')}</span>
         </h2>
-        <p style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '40px', fontWeight: '300' }}>
+        <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', lineHeight: '1.8', marginBottom: '40px', fontWeight: '300' }}>
           {home.brand_paragraph || (
             <Trans i18nKey="brand.paragraph">
               Placeholder text <strong style={{ color: '#1CAAD9' }}>17 years of experience</strong> more text.

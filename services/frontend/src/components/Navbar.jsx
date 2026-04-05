@@ -23,9 +23,9 @@ const Navbar = ({ whatsapp } = {}) => {
   ];
 
   const styles = {
-    wrapper: { width: '100%', padding: '0 20px', display: 'flex', justifyContent: 'center', position: 'fixed', top: '40px', left: 0, zIndex: 100 },
-    container: { width: '100%', maxWidth: '1400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)', borderRadius: '40px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', padding: '10px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-    iconButton: { cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', borderRadius: '50%', backgroundColor: 'transparent', color: '#000', textDecoration: 'none' }
+    wrapper: { width: '100%', padding: '0 clamp(10px, 2vw, 20px)', display: 'flex', justifyContent: 'center', position: 'fixed', top: 'clamp(10px, 3vw, 40px)', left: 0, zIndex: 100 },
+    container: { width: '100%', maxWidth: '1400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)', borderRadius: 'clamp(20px, 4vw, 40px)', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', padding: 'clamp(6px, 1vw, 10px) clamp(14px, 3vw, 40px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+    iconButton: { cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(6px, 1vw, 10px)', borderRadius: '50%', backgroundColor: 'transparent', color: '#000', textDecoration: 'none' }
   };
 
   const WhatsAppIcon = ({ size = 24 }) => (
@@ -49,13 +49,13 @@ const Navbar = ({ whatsapp } = {}) => {
           <BubbleMenu items={menuItems} logo={null} useFixedPosition={false}
             style={{ position: 'relative', top: 'auto', left: 'auto', right: 'auto', padding: 0, pointerEvents: 'auto', zIndex: 201 }} />
         </div>
-        <div style={{ width: '180px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: 'clamp(110px, 28vw, 180px)', display: 'flex', justifyContent: 'center' }}>
           <a href="/"><img src={logoImg} alt="New Shoes Logo" style={{ width: '100%', objectFit: 'contain', display: 'block' }} /></a>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(2px, 1vw, 8px)' }}>
           <LanguageSwitcher />
-          <AnimatedIcon href="https://www.instagram.com/lavanderianewshoes/"><Instagram size={24} strokeWidth={1.5} /></AnimatedIcon>
-          <AnimatedIcon href={waHref}><WhatsAppIcon size={24} /></AnimatedIcon>
+          <span className="hide-on-mobile"><AnimatedIcon href="https://www.instagram.com/lavanderianewshoes/"><Instagram size={22} strokeWidth={1.5} /></AnimatedIcon></span>
+          <AnimatedIcon href={waHref}><WhatsAppIcon size={22} /></AnimatedIcon>
         </div>
       </motion.div>
     </nav>

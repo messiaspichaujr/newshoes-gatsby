@@ -152,14 +152,14 @@ const FranchiseLocator = ({ unidades = [] }) => {
   };
 
   return (
-    <section id="locator" style={{ padding: '100px 20px', backgroundColor: '#F5F5F7' }}>
+    <section id="locator" style={{ padding: 'clamp(60px, 10vw, 100px) 20px', backgroundColor: '#F5F5F7' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '42px', fontWeight: '700', marginBottom: '10px', color: '#000' }}>
+          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(26px, 5vw, 42px)', fontWeight: '700', marginBottom: '10px', color: '#000' }}>
             {t('locator.title')}
           </h2>
-          <p style={{ color: '#666', fontSize: '18px' }}>{t('locator.subtitle')}</p>
+          <p style={{ color: '#666', fontSize: 'clamp(14px, 3vw, 18px)' }}>{t('locator.subtitle')}</p>
         </div>
 
         {/* Smart Search Input */}
