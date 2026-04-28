@@ -6,6 +6,7 @@ import Hero from '../components/Hero'
 import Benefits from '../components/Benefits'
 import BrandStory from '../components/BrandStory'
 import CleaningGame from '../components/CleaningGame'
+import IconParallax from '../components/IconParallax'
 import FranchiseLocator from '../components/FranchiseLocator'
 import FranchiseForm from '../components/FranchiseForm'
 import Footer from '../components/Footer'
@@ -31,6 +32,7 @@ const IndexPage = ({ data, pageContext }) => {
       <Benefits home={home} />
       <BrandStory home={home} />
       <CleaningGame />
+      <IconParallax />
       <FranchiseLocator unidades={unidades} />
       <FranchiseForm />
       <Footer home={home} />

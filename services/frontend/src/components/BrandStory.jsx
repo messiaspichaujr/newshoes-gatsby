@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Trans, useTranslation } from 'react-i18next';
+import fundoTeste from '../assets/fundo-teste.png';
 
 const BrandStory = ({ home = {} }) => {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ const BrandStory = ({ home = {} }) => {
     offset: ["start end", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
 
   return (
     <section id="brand" ref={ref} style={{ position: 'relative', height: '80vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -19,7 +20,7 @@ const BrandStory = ({ home = {} }) => {
         style={{
           position: 'absolute',
           top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: 'url("https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80")',
+          backgroundImage: `url(${fundoTeste})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           y: backgroundY,
