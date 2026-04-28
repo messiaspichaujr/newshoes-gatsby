@@ -64,12 +64,12 @@ const Footer = ({ home = {} }) => {
     },
     logoText: {
       fontSize: '28px',
-      fontWeight: '900',
+      fontWeight: '700',
       fontStyle: 'italic',
       marginBottom: '20px',
       display: 'block',
       letterSpacing: '-1px',
-      fontFamily: 'Space Grotesk, sans-serif'
+      fontFamily: 'Montserrat, sans-serif'
     },
     description: {
       color: '#a1a1a1',
@@ -88,12 +88,12 @@ const Footer = ({ home = {} }) => {
     },
     columnTitle: {
       fontSize: '12px',
-      fontWeight: 'bold',
+      fontWeight: '600',
       color: '#666',
       marginBottom: '10px',
       letterSpacing: '1px',
       textTransform: 'uppercase',
-      fontFamily: 'Space Grotesk, sans-serif'
+      fontFamily: 'Montserrat, sans-serif'
     },
     link: {
       color: '#fff',
@@ -149,7 +149,7 @@ const Footer = ({ home = {} }) => {
 
         <div style={styles.bottomBar}>
           <span>{t('footer.copyright')}</span>
-          <div style={{ display: 'flex', gap: '20px', fontWeight: 'bold' }}>
+          <div style={{ display: 'flex', gap: '20px', fontWeight: '500' }}>
             <a
               href={home.footer_instagram_url || 'https://www.instagram.com/lavanderianewshoes/'}
               target="_blank" rel="noopener noreferrer"

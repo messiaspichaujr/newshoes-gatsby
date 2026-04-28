@@ -45,7 +45,7 @@ const BrandStory = ({ home = {} }) => {
           zIndex: 1
         }}
       >
-        <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(20px, 4vw, 32px)', marginBottom: '20px' }}>
+        <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(20px, 4vw, 32px)', marginBottom: '20px' }}>
           {home.brand_title_prefix || t('brand.title_prefix')}{' '}
           <span style={{ color: '#1CAAD9' }}>{home.brand_title_highlight || t('brand.title_highlight')}</span>
         </h2>

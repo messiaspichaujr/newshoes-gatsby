@@ -27,7 +27,7 @@ const LanguageSwitcher = () => {
               fontSize: '12px',
               fontWeight: language === lng ? '800' : '500',
               color: language === lng ? '#1CAAD9' : '#666',
-              fontFamily: 'Space Grotesk, sans-serif',
+              fontFamily: 'Montserrat, sans-serif',
               letterSpacing: '0.5px',
               textDecoration: language === lng ? 'underline' : 'none',
               textUnderlineOffset: '3px',

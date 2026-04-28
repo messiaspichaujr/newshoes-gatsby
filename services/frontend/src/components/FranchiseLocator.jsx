@@ -156,7 +156,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(26px, 5vw, 42px)', fontWeight: '700', marginBottom: '10px', color: '#000' }}>
+          <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(26px, 5vw, 42px)', fontWeight: '600', marginBottom: '10px', color: '#000' }}>
             {t('locator.title')}
           </h2>
           <p style={{ color: '#666', fontSize: 'clamp(14px, 3vw, 18px)' }}>{t('locator.subtitle')}</p>
@@ -216,7 +216,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
                   color: '#fff',
                   border: 'none',
                   cursor: 'pointer',
-                  fontWeight: '700',
+                  fontWeight: '600',
                   fontSize: '14px',
                   fontFamily: 'Inter, sans-serif',
                   letterSpacing: '0.05em',
@@ -358,7 +358,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
                     >
                       <Building2 size={18} color="#1CAAD9" style={{ flexShrink: 0, pointerEvents: 'none' }} />
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <p style={{ margin: 0, fontSize: '15px', fontWeight: '600', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <p style={{ margin: 0, fontSize: '15px', fontWeight: '500', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {unit.nome}
                         </p>
                         {unit.cidade && unit.estado && (
@@ -397,7 +397,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
                       backgroundColor: selectedState ? 'rgba(28,170,217,0.08)' : '#fff',
                       fontSize: '14px',
                       fontFamily: 'Inter, sans-serif',
-                      fontWeight: '600',
+                      fontWeight: '500',
                       color: selectedState ? '#1CAAD9' : '#555',
                       cursor: 'pointer',
                       outline: 'none',
@@ -429,7 +429,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
                       backgroundColor: selectedCity ? 'rgba(28,170,217,0.08)' : '#fff',
                       fontSize: '14px',
                       fontFamily: 'Inter, sans-serif',
-                      fontWeight: '600',
+                      fontWeight: '500',
                       color: selectedCity ? '#1CAAD9' : '#555',
                       cursor: 'pointer',
                       outline: 'none',
@@ -540,7 +540,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
                         background: 'linear-gradient(135deg, #000 0%, #1a1a2e 100%)',
                       }}>
                         <span style={{
-                          fontFamily: 'Space Grotesk', fontSize: '28px', fontWeight: '800',
+                          fontFamily: 'Montserrat, sans-serif', fontSize: '28px', fontWeight: '700',
                           color: 'rgba(28,170,217,0.6)', letterSpacing: '0.1em',
                         }}>NEW SHOES</span>
                       </div>
@@ -559,7 +559,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
 
                   <div style={{ padding: '28px', display: 'flex', flexDirection: 'column', gap: '20px', flex: 1 }}>
                   <div>
-                      <h3 style={{ fontFamily: 'Space Grotesk', fontSize: '22px', fontWeight: 'bold', margin: '0 0 4px', color: '#000' }}>
+                      <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '22px', fontWeight: '600', margin: '0 0 4px', color: '#000' }}>
                         {unit.nome}
                       </h3>
                       <p style={{ color: '#999', fontSize: '14px', margin: 0 }}>{unit.cidade}</p>
@@ -590,7 +590,7 @@ const FranchiseLocator = ({ unidades = [] }) => {
                       borderRadius: '16px',
                       border: 'none',
                       cursor: 'pointer',
-                      fontWeight: 'bold',
+                      fontWeight: '600',
                       fontSize: '14px',
                       display: 'flex',
                       justifyContent: 'space-between',

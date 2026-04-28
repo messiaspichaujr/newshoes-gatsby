@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Instagram } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import logoImg from '../assets/logo-marca.png';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import BubbleMenu from './BubbleMenu';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -12,20 +12,69 @@ const Navbar = ({ whatsapp } = {}) => {
   const waNumber = whatsapp ? whatsapp.replace(/\D/g, '').replace(/^0/, '55') : DEFAULT_WHATSAPP
   const waHref = `https://wa.me/${waNumber}`
   const { t } = useTranslation();
+  const [navVisible, setNavVisible] = useState(true);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const heroMultiplier = isMobile ? 3.5 : 4.5;
+    const heroHeight = window.innerHeight * heroMultiplier;
+    if (latest < heroHeight * 0.15) {
+      setNavVisible(true);
+    } else if (latest < heroHeight) {
+      setNavVisible(false);
+    } else {
+      const previous = scrollY.getPrevious();
+      if (previous !== undefined) {
+        setNavVisible(latest < previous);
+      }
+    }
+  });
 
   const menuItems = [
     { label: t('nav.home'), href: '/', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } },
     { label: t('nav.benefits'), href: '/#benefits', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
     { label: t('nav.brand'), href: '/#brand', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#ffffff' } },
     { label: t('nav.locations'), href: '/#locator', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
-    { label: t('nav.franchise'), href: '/#franchise', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } },
-    { label: t('nav.sac'), href: '/#sac', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } }
+    { label: t('nav.franchise'), href: '/#franchise', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } }
   ];
 
   const styles = {
-    wrapper: { width: '100%', padding: '0 clamp(10px, 2vw, 20px)', display: 'flex', justifyContent: 'center', position: 'fixed', top: 'clamp(10px, 3vw, 40px)', left: 0, zIndex: 100 },
-    container: { width: '100%', maxWidth: '1400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)', borderRadius: 'clamp(20px, 4vw, 40px)', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', padding: 'clamp(6px, 1vw, 10px) clamp(14px, 3vw, 40px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-    iconButton: { cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(6px, 1vw, 10px)', borderRadius: '50%', backgroundColor: 'transparent', color: '#000', textDecoration: 'none' }
+    wrapper: { 
+      width: '100%', 
+      padding: '0 clamp(10px, 2vw, 20px)', 
+      display: 'flex', 
+      justifyContent: 'center', 
+      position: 'fixed', 
+      top: 'clamp(10px, 3vw, 40px)', 
+      left: 0, 
+      zIndex: 100 
+    },
+    container: { 
+      width: '100%', 
+      maxWidth: '1400px', 
+      backgroundColor: 'rgba(255, 255, 255, 0.75)',   
+      backdropFilter: 'blur(16px)',                
+      WebkitBackdropFilter: 'blur(16px)',             
+      border: '1px solid rgba(0, 0, 0, 0.08)',        
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',   
+      borderRadius: 'clamp(20px, 4vw, 40px)', 
+      padding: 'clamp(6px, 1vw, 10px) clamp(14px, 3vw, 40px)', 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'center' 
+    },
+    iconButton: { 
+      cursor: 'pointer', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      padding: 'clamp(6px, 1vw, 10px)', 
+      borderRadius: '50%', 
+      backgroundColor: 'transparent', 
+      color: '#000', 
+      textDecoration: 'none' 
+    }
   };
 
   const WhatsAppIcon = ({ size = 24 }) => (
@@ -44,7 +93,7 @@ const Navbar = ({ whatsapp } = {}) => {
 
   return (
     <nav style={styles.wrapper}>
-      <motion.div style={styles.container} initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+      <motion.div style={styles.container} initial={{ y: -100, opacity: 0 }} animate={{ y: navVisible ? 0 : -30, opacity: navVisible ? 1 : 0 }} transition={{ duration: 0.3, ease: "easeOut" }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <BubbleMenu items={menuItems} logo={null} useFixedPosition={false}
             style={{ position: 'relative', top: 'auto', left: 'auto', right: 'auto', padding: 0, pointerEvents: 'auto', zIndex: 201 }} />

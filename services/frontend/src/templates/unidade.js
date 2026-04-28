@@ -106,8 +106,8 @@ const UnidadePage = ({ data }) => {
               {u.estado} — {u.cidade}
             </span>
             <h1 style={{
-              fontFamily: 'Space Grotesk', fontSize: 'clamp(28px, 4vw, 46px)',
-              fontWeight: '800', margin: '16px 0 32px', color: '#fff', lineHeight: 1.1,
+              fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(28px, 4vw, 46px)',
+              fontWeight: '700', margin: '16px 0 32px', color: '#fff', lineHeight: 1.1,
             }}>
               {u.nome}
             </h1>
@@ -120,7 +120,7 @@ const UnidadePage = ({ data }) => {
                   display: 'inline-flex', alignItems: 'center', gap: '10px',
                   backgroundColor: '#25D366', color: '#fff',
                   padding: '16px 32px', borderRadius: '50px',
-                  fontWeight: '700', fontSize: '15px', fontFamily: 'Inter, sans-serif',
+                  fontWeight: '600', fontSize: '15px', fontFamily: 'Inter, sans-serif',
                   textDecoration: 'none', transition: 'opacity 0.2s',
                   boxShadow: '0 4px 20px rgba(37,211,102,0.4)',
                 }}
@@ -160,7 +160,7 @@ const UnidadePage = ({ data }) => {
                 background: 'linear-gradient(135deg, #0d0d1a 0%, #1a1a3e 100%)',
               }}>
                 <span style={{
-                  fontFamily: 'Space Grotesk', fontSize: '32px', fontWeight: '800',
+                  fontFamily: 'Montserrat, sans-serif', fontSize: '32px', fontWeight: '700',
                   color: 'rgba(28,170,217,0.4)', letterSpacing: '0.1em',
                 }}>NEW SHOES</span>
               </div>
@@ -196,7 +196,7 @@ const UnidadePage = ({ data }) => {
                   {u.estado}
                 </span>
                 <h2 style={{
-                  fontFamily: 'Space Grotesk', fontSize: '28px', fontWeight: '700',
+                  fontFamily: 'Montserrat, sans-serif', fontSize: '28px', fontWeight: '700',
                   marginTop: '14px', marginBottom: '4px', color: '#000',
                 }}>
                   {u.nome}
@@ -305,7 +305,7 @@ const UnidadePage = ({ data }) => {
                 <p style={{ fontSize: '12px', fontWeight: '700', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'Inter, sans-serif', margin: '0 0 6px' }}>
                   {t(`unidade.service.${plan.key}.label`)}
                 </p>
-                <p style={{ fontSize: '28px', fontWeight: '800', color: '#000', fontFamily: 'Space Grotesk', margin: '0 0 20px' }}>
+                <p style={{ fontSize: '28px', fontWeight: '700', color: '#000', fontFamily: 'Montserrat, sans-serif', margin: '0 0 20px' }}>
                   {plan.price}
                 </p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -383,7 +383,7 @@ const UnidadePage = ({ data }) => {
                   )}
                   <span style={{
                     fontWeight: '700', fontSize: '15px', color: '#1CAAD9',
-                    fontFamily: 'Space Grotesk', minWidth: '80px', textAlign: 'right',
+                    fontFamily: 'Montserrat, sans-serif', minWidth: '80px', textAlign: 'right',
                   }}>
                     {r.preco || r.price}
                   </span>
@@ -413,7 +413,7 @@ const ContactRow = ({ icon, children }) => (
 
 const SectionTitle = ({ children, style }) => (
   <h2 style={{
-    fontFamily: 'Space Grotesk', fontSize: '28px', fontWeight: '700',
+    fontFamily: 'Montserrat, sans-serif', fontSize: '28px', fontWeight: '700',
     color: '#000', marginBottom: '12px', ...style,
   }}>
     {children}
@@ -430,7 +430,7 @@ const CtaButton = ({ href, label }) => (
         display: 'inline-flex', alignItems: 'center', gap: '10px',
         backgroundColor: '#25D366', color: '#fff',
         padding: '18px 40px', borderRadius: '50px',
-        fontWeight: '700', fontSize: '15px', fontFamily: 'Inter, sans-serif',
+        fontWeight: '600', fontSize: '15px', fontFamily: 'Inter, sans-serif',
         textDecoration: 'none', boxShadow: '0 4px 16px rgba(37,211,102,0.35)',
         transition: 'opacity 0.2s',
       }}

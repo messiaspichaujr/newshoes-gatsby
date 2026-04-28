@@ -142,7 +142,7 @@ const CleaningGame = () => {
   if (!mounted) {
     return (
       <section style={{ padding: '80px 20px', backgroundColor: '#fff', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '32px', marginBottom: '10px' }}>
+        <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '32px', marginBottom: '10px' }}>
           {t('cleaning.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('cleaning.title_highlight')}</span>
         </h2>
         <p style={{ color: '#666', marginBottom: '40px' }}>
@@ -154,7 +154,7 @@ const CleaningGame = () => {
 
   return (
     <section style={{ padding: '80px 20px', backgroundColor: '#fff', textAlign: 'center' }}>
-      <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '32px', marginBottom: '10px' }}>
+      <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '32px', marginBottom: '10px' }}>
         {t('cleaning.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('cleaning.title_highlight')}</span>
       </h2>
       <p style={{ color: '#666', marginBottom: '40px' }}>
@@ -215,7 +215,7 @@ const CleaningGame = () => {
           display: 'inline-flex', alignItems: 'center', gap: '10px',
           fontWeight: 'bold',
           fontSize: '14px',
-          fontFamily: 'Space Grotesk',
+          fontFamily: 'Montserrat, sans-serif',
           letterSpacing: '1px',
           boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
         }}

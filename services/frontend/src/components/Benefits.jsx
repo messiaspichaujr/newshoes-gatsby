@@ -52,27 +52,13 @@ const Benefits = ({ home = {} }) => {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 80px)' }}
-        >
-          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: '700', marginBottom: '10px' }}>
-            {home.benefits_title
-              ? home.benefits_title
-              : <>{t('benefits.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('benefits.title_highlight')}</span></>}
-          </h2>
-          <p style={{ color: '#666', fontSize: '18px' }}>{home.benefits_subtitle || t('benefits.subtitle')}</p>
-        </motion.div>
-
-        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gridTemplateColumns: 'repeat(3, minmax(min(100%, 280px), 1fr))',
             gap: '20px',
             marginBottom: 'clamp(50px, 10vw, 100px)'
           }}
@@ -99,7 +85,7 @@ const Benefits = ({ home = {} }) => {
               }}>
                 {item.icon}
               </div>
-              <h3 style={{ fontFamily: 'Space Grotesk', fontSize: '24px', fontWeight: '700', marginBottom: '10px' }}>{item.title}</h3>
+              <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '24px', fontWeight: '600', marginBottom: '10px' }}>{item.title}</h3>
               <p style={{ color: '#888', lineHeight: '1.6' }}>{item.desc}</p>
             </motion.div>
           ))}
@@ -122,7 +108,7 @@ const Benefits = ({ home = {} }) => {
           <div style={{ position: 'absolute', top: '-50%', left: '-20%', width: '500px', height: '500px', background: '#1CAAD9', filter: 'blur(150px)', opacity: 0.2, borderRadius: '50%' }} />
 
           <div style={{ flex: 1, minWidth: 'min(100%, 280px)', zIndex: 1 }}>
-            <h3 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 4vw, 36px)', marginBottom: '30px' }}>
+            <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(22px, 4vw, 36px)', marginBottom: '30px' }}>
               {home.benefits_structure_title || t('benefits.structure_title')}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -145,7 +131,7 @@ const Benefits = ({ home = {} }) => {
             <motion.h2
               animate={{ scale: [1, 1.02, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
-              style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(40px, 8vw, 64px)', color: '#1CAAD9', fontWeight: '700', margin: '10px 0' }}
+              style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(40px, 8vw, 64px)', color: '#1CAAD9', fontWeight: '600', margin: '10px 0' }}
             >
               {home.benefits_investment_amount || t('benefits.investment_amount')}
             </motion.h2>

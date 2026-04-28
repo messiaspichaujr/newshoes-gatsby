@@ -15,7 +15,7 @@ const NotFoundPage = () => {
     <div className="app-wrapper">
       <Navbar />
       <section style={{ paddingTop: '160px', paddingBottom: '80px', minHeight: '60vh', textAlign: 'center' }}>
-        <h1 style={{ fontFamily: 'Space Grotesk', fontSize: '48px', fontWeight: '700', color: '#000' }}>
+        <h1 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '48px', fontWeight: '700', color: '#000' }}>
           {t('404.title')}
         </h1>
         <p style={{ color: '#666', fontSize: '18px', marginTop: '20px' }}>

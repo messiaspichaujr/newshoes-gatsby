@@ -35,7 +35,7 @@ const FranchiseForm = () => {
       <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(28px, 5vw, 48px)', lineHeight: '1.2', marginBottom: '20px' }}>
+          <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(28px, 5vw, 48px)', lineHeight: '1.2', marginBottom: '20px' }}>
             {t('franchise.title_prefix')} <br />
             <span style={{ color: '#1CAAD9' }}>{t('franchise.title_highlight')}</span>
           </h2>
@@ -74,10 +74,10 @@ const FranchiseForm = () => {
               borderRadius: '12px',
               border: 'none',
               fontSize: '18px',
-              fontWeight: 'bold',
+              fontWeight: '600',
               cursor: 'pointer',
               marginTop: '20px',
-              fontFamily: 'Space Grotesk',
+              fontFamily: 'Montserrat, sans-serif',
               letterSpacing: '1px'
             }}
           >

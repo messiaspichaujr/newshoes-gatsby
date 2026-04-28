@@ -8,7 +8,6 @@ import BrandStory from '../components/BrandStory'
 import CleaningGame from '../components/CleaningGame'
 import FranchiseLocator from '../components/FranchiseLocator'
 import FranchiseForm from '../components/FranchiseForm'
-import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import Seo from '../components/seo'
 import '../css/global.css'
@@ -34,7 +33,6 @@ const IndexPage = ({ data, pageContext }) => {
       <CleaningGame />
       <FranchiseLocator unidades={unidades} />
       <FranchiseForm />
-      <ContactForm />
       <Footer home={home} />
     </div>
   );

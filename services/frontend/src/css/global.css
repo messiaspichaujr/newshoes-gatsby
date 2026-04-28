@@ -1,10 +1,35 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'StretchPro';
+  src: url('../fonts/StretchPro.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg-color: #ffffff;
   --text-main: #000000;
   --footer-bg: #0a0a0a;
   --footer-text: #a1a1a1;
   --radius-lg: 40px;
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'Montserrat', sans-serif;
+  --font-accent: 'StretchPro', sans-serif;
 }
 
 html {
