@@ -4,15 +4,18 @@ RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips
 
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json package-lock.json* ./
 RUN npm install
 
 COPY . .
 
-RUN mkdir -p /app/public/uploads
+RUN npm run build
+
+RUN mkdir -p /app/data /app/public/uploads
 
 EXPOSE 1337
 
 ENV NODE_OPTIONS=--max-old-space-size=400
+ENV DATABASE_FILENAME=data/data.db
 
 CMD ["npm", "run", "start"]
