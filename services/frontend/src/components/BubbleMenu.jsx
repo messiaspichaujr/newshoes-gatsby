@@ -72,6 +72,7 @@ export default function BubbleMenu({ logo, onMenuClick, className, style, menuAr
         <button type="button" className={`bubble toggle-bubble menu-btn ${isMenuOpen ? 'open' : ''}`} onClick={handleToggle} aria-label={menuAriaLabel} aria-pressed={isMenuOpen} style={{ background: menuBg }}>
           <span className="menu-line" style={{ background: menuContentColor }} />
           <span className="menu-line short" style={{ background: menuContentColor }} />
+          {!isMenuOpen && <span className="menu-tooltip">{menuAriaLabel}</span>}
         </button>
       </nav>
       {showOverlay && (

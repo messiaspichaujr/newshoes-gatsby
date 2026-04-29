@@ -1,7 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import fundoBolhas from '../assets/fundo-com-bolhas.png';
+import logoImg from '../assets/logomarca.png';
+
+const Bubble = ({ delay, size, left }) => (
+  <motion.div
+    initial={{ y: 0, opacity: 0 }}
+    animate={{ y: -500, opacity: [0, 0.6, 0.3, 0] }}
+    transition={{
+      duration: Math.random() * 5 + 5,
+      repeat: Infinity,
+      delay: delay,
+      ease: "linear"
+    }}
+    style={{
+      position: 'absolute',
+      bottom: '0',
+      left: left,
+      width: size,
+      height: size,
+      borderRadius: '50%',
+      border: '1px solid rgba(255, 255, 255, 0.5)',
+      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+      boxShadow: '0 0 15px rgba(255, 255, 255, 0.25)',
+      pointerEvents: 'none'
+    }}
+  />
+);
 
 const Hero = ({ home = {} }) => {
   const { t } = useTranslation();
@@ -20,37 +45,27 @@ const Hero = ({ home = {} }) => {
   const isMobile = vw < 768;
   const isTablet = vw >= 768 && vw < 1024;
 
-  // Responsive shoe
   const shoeScale = isMobile ? 0.35 : isTablet ? 0.45 : 0.6;
   const cameraFov = isMobile ? 40 : 30;
   const zoomAmount = isMobile ? 1.5 : 2.5;
-
-  // Responsive bg
-  const bgSize = isMobile ? 'clamp(280px, 85vw, 600px) auto' : 'clamp(900px, 80vw, 1300px) auto';
-
-  // Responsive scroll height (menor em mobile)
   const heroHeight = isMobile ? '350vh' : '450vh';
+
+  const bubbles = Array.from({ length: 25 }).map((_, i) => ({
+    id: i,
+    size: (Math.random() * 40 + 15) + 'px',
+    left: Math.random() * 100 + '%',
+    delay: Math.random() * 6
+  }));
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
 
-  // Fase 1a: "NEW SHOES" ganha força (0% → 30%)
-  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [0.04, 1]);
-
-  // Fase 2: Fundo com bolhas desliza de baixo pra cima (35% → 65%)
-  const bgY = useTransform(scrollYProgress, (latest) => {
-    const height = typeof window !== 'undefined' ? window.innerHeight : 1000;
-    if (latest <= 0.35) return height;
-    if (latest >= 0.65) return 0;
-    const progress = (latest - 0.35) / 0.3;
-    const eased = 1 - Math.pow(1 - progress, 3);
-    return height * (1 - eased);
-  });
+  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [0.08, 1]);
 
   const blackBgOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
-  const bgFadeOpacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
+  const bubblesOpacity = useTransform(scrollYProgress, [0.4, 0.55, 0.65, 0.8], [0, 1, 1, 0]);
   const revealOpacity = useTransform(scrollYProgress, [0.45, 0.6, 0.7, 0.95], [0, 1, 1, 0]);
   const revealY = useTransform(scrollYProgress, [0.45, 0.6], [40, 0]);
 
@@ -58,20 +73,21 @@ const Hero = ({ home = {} }) => {
     <section ref={heroRef} style={{ height: heroHeight, position: 'relative', width: '100%' }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
 
-        {/* Background text */}
-        <motion.h1
+        {/* Background logo */}
+        <motion.img
+          src={logoImg}
+          alt=""
           style={{
             position: 'absolute', top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
-            fontSize: isMobile ? '12vw' : isTablet ? '10vw' : '10vw',
-            fontWeight: '900', color: '#000', zIndex: 0,
-            pointerEvents: 'none', whiteSpace: 'nowrap',
-            fontFamily: 'StretchPro, sans-serif',
+            width: isMobile ? '75vw' : '85vw',
+            maxWidth: '1600px',
+            objectFit: 'contain',
+            zIndex: 0,
+            pointerEvents: 'none',
             opacity: textOpacity
           }}
-        >
-          {home.hero_title || t('hero.title')}
-        </motion.h1>
+        />
 
         {/* 3D Canvas */}
         {mounted && typeof window !== 'undefined' && (() => {
@@ -102,17 +118,24 @@ const Hero = ({ home = {} }) => {
           }}
         />
 
-        {/* Fundo com bolhas */}
+        {/* Bolhas animadas */}
         <motion.div
           style={{
-            position: 'absolute', left: 0, width: '100%', height: '100%',
-            backgroundImage: `url(${fundoBolhas})`,
-            backgroundSize: bgSize,
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            zIndex: 10, y: bgY, opacity: bgFadeOpacity
+            position: 'absolute', inset: 0,
+            zIndex: 10, pointerEvents: 'none',
+            overflow: 'hidden',
+            opacity: bubblesOpacity
           }}
-        />
+        >
+          {bubbles.map(bubble => (
+            <Bubble
+              key={bubble.id}
+              size={bubble.size}
+              left={bubble.left}
+              delay={bubble.delay}
+            />
+          ))}
+        </motion.div>
 
         {/* "Por que a New Shoes?" */}
         <motion.div
@@ -130,8 +153,11 @@ const Hero = ({ home = {} }) => {
               ? home.benefits_title
               : <>{t('benefits.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('benefits.title_highlight')}</span></>}
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(13px, 2.5vw, 18px)', textAlign: 'center' }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(13px, 2.5vw, 18px)', textAlign: 'center', marginBottom: '20px' }}>
             {home.benefits_subtitle || t('benefits.subtitle')}
+          </p>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 'clamp(12px, 2vw, 16px)', textAlign: 'center', maxWidth: '600px', lineHeight: '1.6' }}>
+            {home.benefits_hero_description || t('benefits.hero_description')}
           </p>
         </motion.div>
       </div>

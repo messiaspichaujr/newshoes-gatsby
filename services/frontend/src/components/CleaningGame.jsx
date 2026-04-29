@@ -168,7 +168,23 @@ const CleaningGame = () => {
     canvas.height = gameSize.height;
 
     ctx.globalCompositeOperation = 'source-over';
-    ctx.drawImage(dirtyImgObj, 0, 0, gameSize.width, gameSize.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const imgAspect = dirtyImgObj.width / dirtyImgObj.height;
+    const canvasAspect = canvas.width / canvas.height;
+    let dx, dy, dw, dh;
+    if (imgAspect > canvasAspect) {
+      dw = canvas.width;
+      dh = canvas.width / imgAspect;
+      dx = 0;
+      dy = (canvas.height - dh) / 2;
+    } else {
+      dh = canvas.height;
+      dw = canvas.height * imgAspect;
+      dx = (canvas.width - dw) / 2;
+      dy = 0;
+    }
+    ctx.drawImage(dirtyImgObj, dx, dy, dw, dh);
   };
 
   if (!mounted) {
@@ -192,8 +208,6 @@ const CleaningGame = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      <div style={{ position: 'absolute', top: '-30%', right: '-10%', width: '500px', height: '500px', background: '#1CAAD9', filter: 'blur(180px)', opacity: 0.06, borderRadius: '50%', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', bottom: '-20%', left: '-10%', width: '400px', height: '400px', background: '#1CAAD9', filter: 'blur(150px)', opacity: 0.04, borderRadius: '50%', pointerEvents: 'none' }} />
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -203,7 +217,7 @@ const CleaningGame = () => {
         <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(24px, 5vw, 42px)', marginBottom: '10px', color: '#000' }}>
           {t('cleaning.title_prefix')} <span style={{ color: '#1CAAD9' }}>{t('cleaning.title_highlight')}</span>
         </h2>
-        <p style={{ color: '#666', marginBottom: 'clamp(30px, 6vw, 60px)', fontSize: 'clamp(13px, 2vw, 16px)' }}>
+        <p style={{ color: '#000', marginBottom: 'clamp(30px, 6vw, 60px)', fontSize: 'clamp(16px, 3vw, 22px)', fontWeight: '500' }}>
           {t('cleaning.subtitle')}
         </p>
       </motion.div>
@@ -224,7 +238,7 @@ const CleaningGame = () => {
           margin: '0 auto',
           borderRadius: '30px',
           overflow: 'hidden',
-          background: 'rgba(0, 0, 0, 0.02)',
+          background: '#ffffff',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           border: '1px solid rgba(0, 0, 0, 0.06)',
@@ -243,7 +257,7 @@ const CleaningGame = () => {
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: `url(${imgClean})`,
-          backgroundSize: '100% 100%',
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }} />

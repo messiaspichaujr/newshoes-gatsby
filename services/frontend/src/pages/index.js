@@ -6,8 +6,6 @@ import Hero from '../components/Hero'
 import Benefits from '../components/Benefits'
 import BrandStory from '../components/BrandStory'
 import CleaningGame from '../components/CleaningGame'
-import IconParallax from '../components/IconParallax'
-import FranchiseLocator from '../components/FranchiseLocator'
 import FranchiseForm from '../components/FranchiseForm'
 import Footer from '../components/Footer'
 import Seo from '../components/seo'
@@ -27,13 +25,11 @@ const IndexPage = ({ data, pageContext }) => {
       <div style={{ backgroundColor: '#000', color: '#fff', textAlign: 'center', padding: '8px', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px' }}>
         {home.welcome_banner || t('welcome_banner')}
       </div>
-      <Navbar />
+      <Navbar unidades={unidades} />
       <Hero home={home} />
       <Benefits home={home} />
       <BrandStory home={home} />
       <CleaningGame />
-      <IconParallax />
-      <FranchiseLocator unidades={unidades} />
       <FranchiseForm />
       <Footer home={home} />
     </div>

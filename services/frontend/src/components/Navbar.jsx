@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { Instagram } from 'lucide-react';
+import { Instagram, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import logoImg from '../assets/logo-marca.png';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import BubbleMenu from './BubbleMenu';
 import LanguageSwitcher from './LanguageSwitcher';
+import FranchiseSearchModal from './FranchiseSearchModal';
 
 const DEFAULT_WHATSAPP = '5547991180109'
 
-const Navbar = ({ whatsapp } = {}) => {
+const Navbar = ({ whatsapp, unidades = [] } = {}) => {
   const waNumber = whatsapp ? whatsapp.replace(/\D/g, '').replace(/^0/, '55') : DEFAULT_WHATSAPP
   const waHref = `https://wa.me/${waNumber}`
   const { t } = useTranslation();
   const [navVisible, setNavVisible] = useState(true);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -35,45 +37,45 @@ const Navbar = ({ whatsapp } = {}) => {
     { label: t('nav.home'), href: '/', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } },
     { label: t('nav.benefits'), href: '/#benefits', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
     { label: t('nav.brand'), href: '/#brand', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#ffffff' } },
-    { label: t('nav.locations'), href: '/#locator', rotation: 5, hoverStyles: { bgColor: '#1CAAD9', textColor: '#ffffff' } },
-    { label: t('nav.franchise'), href: '/#franchise', rotation: -5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } }
+    { label: t('nav.franchise'), href: '/#franchise', rotation: 5, hoverStyles: { bgColor: '#000000', textColor: '#1CAAD9' } }
   ];
 
   const styles = {
-    wrapper: { 
-      width: '100%', 
-      padding: '0 clamp(10px, 2vw, 20px)', 
-      display: 'flex', 
-      justifyContent: 'center', 
-      position: 'fixed', 
-      top: 'clamp(10px, 3vw, 40px)', 
-      left: 0, 
-      zIndex: 100 
+    wrapper: {
+      width: '100%',
+      padding: '0 clamp(10px, 2vw, 20px)',
+      display: 'flex',
+      justifyContent: 'center',
+      position: 'fixed',
+      top: 'clamp(10px, 3vw, 40px)',
+      left: 0,
+      zIndex: 100
     },
-    container: { 
-      width: '100%', 
-      maxWidth: '1400px', 
-      backgroundColor: 'rgba(255, 255, 255, 0.75)',   
-      backdropFilter: 'blur(16px)',                
-      WebkitBackdropFilter: 'blur(16px)',             
-      border: '1px solid rgba(0, 0, 0, 0.08)',        
-      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',   
-      borderRadius: 'clamp(20px, 4vw, 40px)', 
-      padding: 'clamp(6px, 1vw, 10px) clamp(14px, 3vw, 40px)', 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center' 
+    container: {
+      width: '100%',
+      maxWidth: '1400px',
+      backgroundColor: 'rgba(255, 255, 255, 0.75)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      border: '1px solid rgba(0, 0, 0, 0.08)',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
+      borderRadius: 'clamp(20px, 4vw, 40px)',
+      padding: 'clamp(6px, 1vw, 10px) clamp(14px, 3vw, 40px)',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: '8px'
     },
-    iconButton: { 
-      cursor: 'pointer', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      padding: 'clamp(6px, 1vw, 10px)', 
-      borderRadius: '50%', 
-      backgroundColor: 'transparent', 
-      color: '#000', 
-      textDecoration: 'none' 
+    iconButton: {
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 'clamp(6px, 1vw, 10px)',
+      borderRadius: '50%',
+      backgroundColor: 'transparent',
+      color: '#000',
+      textDecoration: 'none'
     }
   };
 
@@ -92,22 +94,47 @@ const Navbar = ({ whatsapp } = {}) => {
   );
 
   return (
-    <nav style={styles.wrapper}>
-      <motion.div style={styles.container} initial={{ y: -100, opacity: 0 }} animate={{ y: navVisible ? 0 : -30, opacity: navVisible ? 1 : 0 }} transition={{ duration: 0.3, ease: "easeOut" }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <BubbleMenu items={menuItems} logo={null} useFixedPosition={false}
-            style={{ position: 'relative', top: 'auto', left: 'auto', right: 'auto', padding: 0, pointerEvents: 'auto', zIndex: 201 }} />
-        </div>
-        <div style={{ width: 'clamp(110px, 28vw, 180px)', display: 'flex', justifyContent: 'center' }}>
-          <a href="/"><img src={logoImg} alt="New Shoes Logo" style={{ width: '100%', objectFit: 'contain', display: 'block' }} /></a>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(2px, 1vw, 8px)' }}>
-          <LanguageSwitcher />
-          <span className="hide-on-mobile"><AnimatedIcon href="https://www.instagram.com/lavanderianewshoes/"><Instagram size={22} strokeWidth={1.5} /></AnimatedIcon></span>
-          <AnimatedIcon href={waHref}><WhatsAppIcon size={22} /></AnimatedIcon>
-        </div>
-      </motion.div>
-    </nav>
+    <>
+      <nav style={styles.wrapper}>
+        <motion.div style={styles.container} initial={{ y: -100, opacity: 0 }} animate={{ y: navVisible ? 0 : -30, opacity: navVisible ? 1 : 0 }} transition={{ duration: 0.3, ease: "easeOut" }}>
+          {/* Esquerda: Menu + Logo */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <BubbleMenu items={menuItems} logo={null} useFixedPosition={false}
+              style={{ position: 'relative', top: 'auto', left: 'auto', right: 'auto', padding: 0, pointerEvents: 'auto', zIndex: 201 }} />
+            <a href="/" style={{ display: 'flex', alignItems: 'center' }}>
+              <img src={logoImg} alt="New Shoes Logo" style={{ width: 'clamp(80px, 20vw, 150px)', objectFit: 'contain', display: 'block' }} />
+            </a>
+          </div>
+
+          {/* Direita: Busca + Idioma + Insta + WhatsApp */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(2px, 1vw, 8px)' }}>
+            <motion.button
+              onClick={() => setSearchOpen(true)}
+              whileHover={{ scale: 1.1, backgroundColor: '#f0f0f0' }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                padding: 'clamp(6px, 1vw, 10px) clamp(10px, 2vw, 16px)',
+                borderRadius: '50px', backgroundColor: 'transparent', border: 'none',
+                color: '#000', fontSize: '13px', fontFamily: 'Inter, sans-serif'
+              }}
+            >
+              <Search size={18} strokeWidth={1.5} />
+              <span className="hide-on-mobile" style={{ color: '#888' }}>{t('locator.search_placeholder')}</span>
+            </motion.button>
+            <LanguageSwitcher />
+            <span className="hide-on-mobile"><AnimatedIcon href="https://www.instagram.com/lavanderianewshoes/"><Instagram size={22} strokeWidth={1.5} /></AnimatedIcon></span>
+            <AnimatedIcon href={waHref}><WhatsAppIcon size={22} /></AnimatedIcon>
+          </div>
+        </motion.div>
+      </nav>
+
+      <FranchiseSearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        unidades={unidades}
+      />
+    </>
   );
 };
 

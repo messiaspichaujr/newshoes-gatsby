@@ -16,6 +16,8 @@ const DynamicIcon = ({ name, size = 32 }) => {
 const Benefits = ({ home = {} }) => {
   const { t } = useTranslation();
 
+  const scatterRotations = [-8, 6, -5, 7, -6, 5];
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -27,8 +29,8 @@ const Benefits = ({ home = {} }) => {
   };
 
   const itemAnim = {
-    hidden: { y: 50, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 50 } }
+    hidden: (i) => ({ scale: 0, rotate: scatterRotations[i] || 0, opacity: 0 }),
+    show: { scale: 1, rotate: 0, opacity: 1, transition: { type: "spring", stiffness: 120, damping: 14 } }
   };
 
   const strapiItems = home.benefits_items;
@@ -66,6 +68,7 @@ const Benefits = ({ home = {} }) => {
           {items.map((item, index) => (
             <motion.div
               key={index}
+              custom={index}
               variants={itemAnim}
               whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               style={{
@@ -92,9 +95,10 @@ const Benefits = ({ home = {} }) => {
         </motion.div>
 
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
+          initial={{ y: 40, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           style={{
             background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)',
             borderRadius: 'clamp(20px, 4vw, 40px)',
