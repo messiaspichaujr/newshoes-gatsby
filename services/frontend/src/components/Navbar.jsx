@@ -44,9 +44,17 @@ const Navbar = ({ whatsapp, unidades: unidadesProp = [] } = {}) => {
   }, [unidadesProp, staticData])
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
-    if (previous !== undefined) {
-      setNavVisible(latest < previous);
+    if (typeof window === 'undefined') return;
+    const heroHeight = window.innerHeight * 4;
+    if (latest <= 100) {
+      setNavVisible(true);
+    } else if (latest < heroHeight) {
+      setNavVisible(false);
+    } else {
+      const previous = scrollY.getPrevious();
+      if (previous !== undefined) {
+        setNavVisible(latest < previous);
+      }
     }
   });
 

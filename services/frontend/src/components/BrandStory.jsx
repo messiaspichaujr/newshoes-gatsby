@@ -1,30 +1,23 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'gatsby';
-import fundoTeste from '../assets/fundo-teste.png';
+import fundoTeste from '../assets/fundo-teste-2.jpeg';
 
 const BrandStory = ({ home = {} }) => {
   const { t } = useTranslation();
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
 
   return (
-    <section id="brand" ref={ref} style={{ position: 'relative', height: '80vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <section id="brand" style={{ position: 'relative', height: '80vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-      <motion.div
+      <div
         style={{
           position: 'absolute',
           top: 0, left: 0, right: 0, bottom: 0,
           backgroundImage: `url(${fundoTeste})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          y: backgroundY,
+          backgroundAttachment: 'fixed',
           zIndex: -1
         }}
       />
@@ -50,7 +43,6 @@ const BrandStory = ({ home = {} }) => {
         <h2 style={{ fontFamily: "'StretchPro', sans-serif", fontSize: 'clamp(28px, 5vw, 48px)', marginBottom: '20px', letterSpacing: '2px', textTransform: 'uppercase' }}>
           {home.brand_title_prefix || t('brand.title_prefix')}{' '}
           <span style={{ color: '#1CAAD9' }}>{home.brand_title_highlight || t('brand.title_highlight')}</span>
-          A EXPERIEENCIA
         </h2>
         <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', lineHeight: '1.8', marginBottom: '40px', fontWeight: '300' }}>
           {home.brand_paragraph || (

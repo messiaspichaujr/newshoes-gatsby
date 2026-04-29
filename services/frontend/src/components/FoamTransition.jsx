@@ -1,45 +1,64 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 
-const FoamTransition = ({ scrollProgress }) => {
-  const { scrollYProgress: fallbackProgress } = useScroll();
-  const progress = scrollProgress ?? fallbackProgress;
-
-  const y1 = useTransform(progress, [0, 0.6], [200, -1200]);
-  const y2 = useTransform(progress, [0, 0.6], [300, -1400]);
-  const y3 = useTransform(progress, [0, 0.6], [400, -1100]);
-  const y4 = useTransform(progress, [0, 0.6], [250, -1300]);
-  const y5 = useTransform(progress, [0, 0.6], [350, -1250]);
-  const y6 = useTransform(progress, [0, 0.6], [150, -1150]);
-  const bubbleOpacity = useTransform(progress, [0.3, 0.55], [1, 0]);
-
-  const bubbleStyle = {
-    position: 'absolute',
-    bottom: '-100px',
-    backgroundColor: '#fff',
-    borderRadius: '50%',
-    filter: 'blur(6px)',
-    zIndex: 20
-  };
+const Bubble = ({ scrollProgress, width, height, left, right, yRange, opacityRange, style = {} }) => {
+  const y = useTransform(scrollProgress, yRange[0], yRange[1]);
+  const opacity = useTransform(scrollProgress, opacityRange[0], opacityRange[1]);
 
   return (
     <motion.div style={{
       position: 'absolute',
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      pointerEvents: 'none',
-      overflow: 'hidden',
-      opacity: bubbleOpacity
+      bottom: '-100px',
+      backgroundColor: '#fff',
+      borderRadius: '50%',
+      filter: 'blur(6px)',
+      width, height, left, right,
+      y, opacity,
+      ...style,
+    }} />
+  );
+};
+
+const FoamTransition = ({ scrollProgress }) => {
+  const bgOpacity = useTransform(scrollProgress, [0.3, 0.55], [0, 1]);
+
+  if (!scrollProgress) return null;
+
+  const bubbles = [
+    { w: '200px', h: '200px', left: '-10%', yR: [[0.35, 0.7], [200, -800]], oR: [[0.35, 0.55, 0.75], [0, 1, 0]] },
+    { w: '250px', h: '250px', right: '-10%', yR: [[0.38, 0.72], [300, -900]], oR: [[0.38, 0.58, 0.78], [0, 1, 0]] },
+    { w: '150px', h: '150px', left: '30%', yR: [[0.4, 0.7], [250, -700]], oR: [[0.4, 0.6, 0.8], [0, 1, 0]] },
+    { w: '300px', h: '300px', left: '50%', yR: [[0.36, 0.7], [200, -850]], oR: [[0.36, 0.56, 0.76], [0, 0.8, 0]], style: { transform: 'translateX(-50%)' } },
+    { w: '180px', h: '180px', left: '70%', yR: [[0.42, 0.72], [300, -750]], oR: [[0.42, 0.62, 0.82], [0, 1, 0]] },
+    { w: '220px', h: '220px', left: '15%', yR: [[0.44, 0.74], [150, -800]], oR: [[0.44, 0.64, 0.84], [0, 0.7, 0]] },
+  ];
+
+  return (
+    <div style={{
+      position: 'absolute', bottom: 0, left: 0,
+      width: '100%', height: '100%',
+      pointerEvents: 'none', overflow: 'hidden',
+      zIndex: 20,
     }}>
-      <motion.div style={{ ...bubbleStyle, width: '200px', height: '200px', left: '-10%', y: y1 }} />
-      <motion.div style={{ ...bubbleStyle, width: '250px', height: '250px', right: '-10%', y: y2 }} />
-      <motion.div style={{ ...bubbleStyle, width: '150px', height: '150px', left: '30%', y: y3 }} />
-      <motion.div style={{ ...bubbleStyle, width: '300px', height: '300px', left: '50%', transform: 'translateX(-50%)', y: y4, opacity: 0.8 }} />
-      <motion.div style={{ ...bubbleStyle, width: '180px', height: '180px', left: '70%', y: y5 }} />
-      <motion.div style={{ ...bubbleStyle, width: '220px', height: '220px', left: '15%', y: y6, opacity: 0.7 }} />
-    </motion.div>
+      <motion.div style={{
+        position: 'absolute', inset: 0,
+        backgroundColor: '#f5f5f5',
+        opacity: bgOpacity,
+      }} />
+      {bubbles.map((b, i) => (
+        <Bubble
+          key={i}
+          scrollProgress={scrollProgress}
+          width={b.w}
+          height={b.h}
+          left={b.left}
+          right={b.right}
+          yRange={b.yR}
+          opacityRange={b.oR}
+          style={b.style}
+        />
+      ))}
+    </div>
   );
 };
 
