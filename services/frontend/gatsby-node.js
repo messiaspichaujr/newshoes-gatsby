@@ -57,9 +57,14 @@ async function fetchUnidades(locale) {
   if (STRAPI_TOKEN) {
     headers.Authorization = `Bearer ${STRAPI_TOKEN}`
   }
-  const res = await fetch(url, { headers })
-  const json = await res.json()
-  return (json.data || []).map(u => ({ ...u, locale }))
+  try {
+    const res = await fetch(url, { headers })
+    const json = await res.json()
+    return (json.data || []).map(u => ({ ...u, locale }))
+  } catch (e) {
+    console.warn(`Could not fetch unidades (${locale}) from Strapi:`, e.message)
+    return []
+  }
 }
 
 async function fetchHomePage() {
