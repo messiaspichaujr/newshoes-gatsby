@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 import Navbar from '../components/Navbar'
@@ -19,6 +19,16 @@ const IndexPage = ({ data, pageContext }) => {
   const ptUnidades = allUnidades.filter(u => u.locale === 'pt-BR');
   const unidades = ptUnidades.length > 0 ? ptUnidades : allUnidades;
   const home = locale === 'pt-BR' ? (data.strapiHomePage || {}) : {};
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 500);
+    }
+  }, []);
 
   return (
     <div className="app-wrapper">

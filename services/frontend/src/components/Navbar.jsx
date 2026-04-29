@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Instagram, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useStaticQuery, graphql } from 'gatsby';
 import logoImg from '../assets/logo-marca.png';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import BubbleMenu from './BubbleMenu';
@@ -9,7 +10,7 @@ import FranchiseSearchModal from './FranchiseSearchModal';
 
 const DEFAULT_WHATSAPP = '5547991180109'
 
-const Navbar = ({ whatsapp, unidades = [] } = {}) => {
+const Navbar = ({ whatsapp, unidades: unidadesProp = [] } = {}) => {
   const waNumber = whatsapp ? whatsapp.replace(/\D/g, '').replace(/^0/, '55') : DEFAULT_WHATSAPP
   const waHref = `https://wa.me/${waNumber}`
   const { t } = useTranslation();
@@ -17,19 +18,35 @@ const Navbar = ({ whatsapp, unidades = [] } = {}) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const heroMultiplier = isMobile ? 3.5 : 4.5;
-    const heroHeight = window.innerHeight * heroMultiplier;
-    if (latest < heroHeight * 0.15) {
-      setNavVisible(true);
-    } else if (latest < heroHeight) {
-      setNavVisible(false);
-    } else {
-      const previous = scrollY.getPrevious();
-      if (previous !== undefined) {
-        setNavVisible(latest < previous);
+  const staticData = useStaticQuery(graphql`
+    query NavbarUnidades {
+      allStrapiUnidade(sort: {nome: ASC}) {
+        nodes {
+          id
+          nome
+          slug
+          endereco
+          whatsapp
+          estado
+          cidade
+          imagem_url
+          locale
+        }
       }
+    }
+  `)
+
+  const unidades = useMemo(() => {
+    if (unidadesProp.length > 0) return unidadesProp
+    const all = staticData.allStrapiUnidade?.nodes || []
+    const pt = all.filter(u => !u.locale || u.locale === 'pt-BR')
+    return pt.length > 0 ? pt : all
+  }, [unidadesProp, staticData])
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (previous !== undefined) {
+      setNavVisible(latest < previous);
     }
   });
 

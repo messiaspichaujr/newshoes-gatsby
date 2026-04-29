@@ -8,6 +8,9 @@ const FoamTransition = ({ scrollProgress }) => {
   const y1 = useTransform(progress, [0, 0.6], [200, -1200]);
   const y2 = useTransform(progress, [0, 0.6], [300, -1400]);
   const y3 = useTransform(progress, [0, 0.6], [400, -1100]);
+  const y4 = useTransform(progress, [0, 0.6], [250, -1300]);
+  const y5 = useTransform(progress, [0, 0.6], [350, -1250]);
+  const y6 = useTransform(progress, [0, 0.6], [150, -1150]);
   const bubbleOpacity = useTransform(progress, [0.3, 0.55], [1, 0]);
 
   const bubbleStyle = {
@@ -15,7 +18,7 @@ const FoamTransition = ({ scrollProgress }) => {
     bottom: '-100px',
     backgroundColor: '#fff',
     borderRadius: '50%',
-    filter: 'blur(8px)',
+    filter: 'blur(6px)',
     zIndex: 20
   };
 
@@ -30,10 +33,12 @@ const FoamTransition = ({ scrollProgress }) => {
       overflow: 'hidden',
       opacity: bubbleOpacity
     }}>
-      <motion.div style={{ ...bubbleStyle, width: '400px', height: '400px', left: '-10%', y: y1 }} />
-      <motion.div style={{ ...bubbleStyle, width: '500px', height: '500px', right: '-10%', y: y2 }} />
-      <motion.div style={{ ...bubbleStyle, width: '300px', height: '300px', left: '30%', y: y3 }} />
-      <motion.div style={{ ...bubbleStyle, width: '600px', height: '600px', left: '50%', transform: 'translateX(-50%)', y: y2, opacity: 0.8 }} />
+      <motion.div style={{ ...bubbleStyle, width: '200px', height: '200px', left: '-10%', y: y1 }} />
+      <motion.div style={{ ...bubbleStyle, width: '250px', height: '250px', right: '-10%', y: y2 }} />
+      <motion.div style={{ ...bubbleStyle, width: '150px', height: '150px', left: '30%', y: y3 }} />
+      <motion.div style={{ ...bubbleStyle, width: '300px', height: '300px', left: '50%', transform: 'translateX(-50%)', y: y4, opacity: 0.8 }} />
+      <motion.div style={{ ...bubbleStyle, width: '180px', height: '180px', left: '70%', y: y5 }} />
+      <motion.div style={{ ...bubbleStyle, width: '220px', height: '220px', left: '15%', y: y6, opacity: 0.7 }} />
     </motion.div>
   );
 };

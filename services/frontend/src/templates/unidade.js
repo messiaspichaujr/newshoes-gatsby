@@ -11,23 +11,47 @@ import '../css/BubbleMenu.css'
 /* ─── Default prices (used when unit has no custom price set) ─── */
 const DEFAULT_PRICES = {
   basic:       'R$ 59,90',
+  express_plus:'R$ 79,90',
   pro:         'R$ 69,90',
-  pro_plus:    'R$ 79,90',
-  express:     'R$ 79,90',
-  express_plus:'R$ 99,90',
+  pro_plus:    'R$ 89,90',
+  ultra:       'R$ 129,90',
 }
 
-const DEFAULT_REPAIRS = [
-  { key: 'bolor',      nome: null, price: 'R$ 14,90', note: null },
-  { key: 'crease',     nome: null, price: 'R$ 24,90', note: null },
-  { key: 'amarelado',  nome: null, price: 'R$ 29,90', note: 'unidade.repair.per_session' },
-  { key: 'midsole',    nome: null, price: 'R$ 79,90', note: 'unidade.repair.from' },
-  { key: 'boost',      nome: null, price: 'R$ 69,90', note: 'unidade.repair.from' },
-  { key: 'cabedal',    nome: null, price: 'R$ 79,90', note: 'unidade.repair.from' },
-  { key: 'retoque',    nome: null, price: 'R$ 19,90', note: null },
-  { key: 'camurca',    nome: null, price: 'R$ 34,90', note: null },
-  { key: 'hidratacao', nome: null, price: 'R$ 14,90', note: null },
-  { key: 'impermeab',  nome: null, price: 'R$ 44,90', note: null },
+const DEFAULT_ADDONS = [
+  { key: 'impermeab',          nome: null, price: 'R$ 44,90' },
+  { key: 'pintura',            nome: null, price: 'R$ 20,00' },
+  { key: 'boost',              nome: null, price: 'R$ 69,90', note: 'unidade.repair.from' },
+  { key: 'cabedal',            nome: null, price: 'R$ 79,90', note: 'unidade.repair.from' },
+  { key: 'cabedal_couro',      nome: null, price: 'R$ 99,90', note: 'unidade.repair.from' },
+  { key: 'couro_2cores',       nome: null, price: 'R$ 120,00', note: 'unidade.repair.from' },
+  { key: 'midsole',            nome: null, price: 'R$ 79,90', note: 'unidade.repair.from' },
+  { key: 'amarelado',          nome: null, price: 'R$ 29,90', note: 'unidade.repair.per_session' },
+  { key: 'amarelado_2',        nome: null, price: 'R$ 29,90', note: 'unidade.repair.per_session' },
+  { key: 'crease',             nome: null, price: 'R$ 24,90' },
+  { key: 'remocao_tinta',      nome: null, price: 'R$ 30,00' },
+  { key: 'retoque',            nome: null, price: 'R$ 34,90' },
+  { key: 'camurca',            nome: null, price: 'R$ 34,90' },
+]
+
+const DEFAULT_PRODUCTS = [
+  { key: 'cadarco_flat',       nome: null, price: 'R$ 14,90' },
+  { key: 'meia_cano_alto',     nome: null, price: 'R$ 54,90' },
+  { key: 'cadarco_color',      nome: null, price: 'R$ 24,90' },
+  { key: 'cadarco_oval',       nome: null, price: 'R$ 14,90' },
+  { key: 'cadarco_fat',        nome: null, price: 'R$ 19,90' },
+  { key: 'camiseta',           nome: null, price: 'R$ 89,90' },
+  { key: 'case_airpod',        nome: null, price: 'R$ 69,90' },
+  { key: 'chaveiro_moto',      nome: null, price: 'R$ 14,90' },
+  { key: 'chaveiro_tag',       nome: null, price: 'R$ 39,90' },
+  { key: 'chaveiro_allstar',   nome: null, price: 'R$ 24,90' },
+  { key: 'chaveiro_premium',   nome: null, price: 'R$ 49,90' },
+  { key: 'chaverinho',         nome: null, price: 'R$ 49,90' },
+  { key: 'meia',               nome: null, price: 'R$ 49,90' },
+  { key: 'nave',               nome: null, price: 'R$ 24,90' },
+  { key: 'odorizador',         nome: null, price: 'R$ 29,90' },
+  { key: 'palmilha',           nome: null, price: 'R$ 44,90' },
+  { key: 'palmilha_slim',      nome: null, price: 'R$ 19,90' },
+  { key: 'pin',                nome: null, price: 'R$ 19,90' },
 ]
 
 const buildPlans = (u) => [
@@ -48,6 +72,12 @@ const buildPlans = (u) => [
     price: u.plano_pro_plus_preco || DEFAULT_PRICES.pro_plus,
     color: '#fefce8', border: '#fde047', badge: 'unidade.service.pro_plus.badge',
     items: ['unidade.service.pro_plus.item1', 'unidade.service.pro_plus.item2', 'unidade.service.pro_plus.item3'],
+  },
+  {
+    key: 'ultra',
+    price: DEFAULT_PRICES.ultra,
+    color: '#fdf2f8', border: '#f9a8d4', badge: 'unidade.service.ultra.badge',
+    items: ['unidade.service.ultra.item1', 'unidade.service.ultra.item2', 'unidade.service.ultra.item3', 'unidade.service.ultra.item4'],
   },
 ]
 
@@ -70,8 +100,8 @@ const UnidadePage = ({ data }) => {
   const u = data.strapiUnidade
   const whatsappHref = waLink(u.whatsapp_sem_tracos || u.whatsapp)
   const plans = buildPlans(u)
-  const repairs = u.reparos?.length > 0 ? u.reparos : DEFAULT_REPAIRS
-  const expressPrice = u.express_preco || DEFAULT_PRICES.express
+  const repairs = u.reparos?.length > 0 ? u.reparos : DEFAULT_ADDONS
+  const expressPrice = u.express_preco || DEFAULT_PRICES.express_plus
   const expressPlusPrice = u.express_plus_preco || DEFAULT_PRICES.express_plus
 
   useEffect(() => {
@@ -302,11 +332,8 @@ const UnidadePage = ({ data }) => {
                     {t(plan.badge)}
                   </span>
                 )}
-                <p style={{ fontSize: '12px', fontWeight: '700', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'Inter, sans-serif', margin: '0 0 6px' }}>
+                <p style={{ fontSize: '16px', fontWeight: '700', color: '#000', fontFamily: 'Montserrat, sans-serif', margin: '0 0 20px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   {t(`unidade.service.${plan.key}.label`)}
-                </p>
-                <p style={{ fontSize: '28px', fontWeight: '700', color: '#000', fontFamily: 'Montserrat, sans-serif', margin: '0 0 20px' }}>
-                  {plan.price}
                 </p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {plan.items.map(item => (
@@ -320,7 +347,7 @@ const UnidadePage = ({ data }) => {
             ))}
           </div>
 
-          {/* Express pricing */}
+          {/* Express */}
           <div style={{
             backgroundColor: '#fff', borderRadius: '16px', padding: '24px 32px',
             boxShadow: '0 2px 10px rgba(0,0,0,0.04)', marginBottom: '48px',
@@ -329,22 +356,15 @@ const UnidadePage = ({ data }) => {
               {t('unidade.service.express.group')}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-              {[
-                { key: 'express', price: expressPrice },
-                { key: 'express_plus', price: expressPlusPrice },
-              ].map(ep => (
-                <div key={ep.key} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span style={{ fontWeight: '700', fontFamily: 'Inter, sans-serif', color: '#000' }}>
-                    {t(`unidade.service.${ep.key}.label`)}
-                  </span>
-                  <span style={{
-                    backgroundColor: '#1CAAD9', color: '#fff',
-                    padding: '4px 14px', borderRadius: '20px',
-                    fontSize: '14px', fontWeight: '700', fontFamily: 'Inter, sans-serif',
-                  }}>
-                    {ep.price}
-                  </span>
-                </div>
+              {['express', 'express_plus'].map(key => (
+                <span key={key} style={{
+                  backgroundColor: '#f0f9ff', color: '#000',
+                  padding: '8px 20px', borderRadius: '20px',
+                  fontSize: '14px', fontWeight: '600', fontFamily: 'Inter, sans-serif',
+                  border: '1px solid #bae6fd',
+                }}>
+                  {t(`unidade.service.${key}.label`)}
+                </span>
               ))}
             </div>
           </div>
@@ -356,39 +376,39 @@ const UnidadePage = ({ data }) => {
           <SectionTitle style={{ marginTop: '60px' }}>{t('unidade.repairs.title')}</SectionTitle>
 
           <div style={{
-            backgroundColor: '#fff', borderRadius: '20px',
-            overflow: 'hidden', boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
-            marginBottom: '40px',
+            backgroundColor: '#fff', borderRadius: '20px', padding: '28px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.04)', marginBottom: '40px',
+            display: 'flex', flexWrap: 'wrap', gap: '10px',
           }}>
             {repairs.map((r, i) => (
-              <div key={r.key || r.nome || i} style={{
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '16px 28px',
-                borderBottom: i < repairs.length - 1 ? '1px solid #f5f5f5' : 'none',
-                backgroundColor: i % 2 === 0 ? '#fff' : '#fafafa',
+              <span key={r.key || r.nome || i} style={{
+                backgroundColor: '#f5f5f5', color: '#333',
+                padding: '10px 18px', borderRadius: '50px',
+                fontSize: '14px', fontFamily: 'Inter, sans-serif', fontWeight: '500',
+                border: '1px solid #e5e7eb',
               }}>
-                <span style={{ fontSize: '15px', fontFamily: 'Inter, sans-serif', color: '#333' }}>
-                  {r.nome || t(`unidade.repair.${r.key}`)}
-                </span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  {r.observacao && (
-                    <span style={{ fontSize: '12px', color: '#999', fontFamily: 'Inter, sans-serif' }}>
-                      {r.observacao}
-                    </span>
-                  )}
-                  {!r.observacao && r.note && (
-                    <span style={{ fontSize: '12px', color: '#999', fontFamily: 'Inter, sans-serif' }}>
-                      {t(r.note)}
-                    </span>
-                  )}
-                  <span style={{
-                    fontWeight: '700', fontSize: '15px', color: '#1CAAD9',
-                    fontFamily: 'Montserrat, sans-serif', minWidth: '80px', textAlign: 'right',
-                  }}>
-                    {r.preco || r.price}
-                  </span>
-                </div>
-              </div>
+                {r.nome || t(`unidade.repair.${r.key}`)}
+              </span>
+            ))}
+          </div>
+
+          {/* ── Products ── */}
+          <SectionTitle style={{ marginTop: '60px' }}>{t('unidade.products.title')}</SectionTitle>
+
+          <div style={{
+            backgroundColor: '#fff', borderRadius: '20px', padding: '28px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.04)', marginBottom: '40px',
+            display: 'flex', flexWrap: 'wrap', gap: '10px',
+          }}>
+            {DEFAULT_PRODUCTS.map((p, i) => (
+              <span key={p.key} style={{
+                backgroundColor: '#fefce8', color: '#333',
+                padding: '10px 18px', borderRadius: '50px',
+                fontSize: '14px', fontFamily: 'Inter, sans-serif', fontWeight: '500',
+                border: '1px solid #fde047',
+              }}>
+                {p.nome || t(`unidade.product.${p.key}`)}
+              </span>
             ))}
           </div>
 
@@ -413,7 +433,7 @@ const ContactRow = ({ icon, children }) => (
 
 const SectionTitle = ({ children, style }) => (
   <h2 style={{
-    fontFamily: 'Montserrat, sans-serif', fontSize: '28px', fontWeight: '700',
+    fontFamily: 'Montserrat, sans-serif', fontSize: '20px', fontWeight: '700',
     color: '#000', marginBottom: '12px', ...style,
   }}>
     {children}
