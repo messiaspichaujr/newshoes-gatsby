@@ -7,6 +7,7 @@ import Benefits from '../components/Benefits'
 import BrandStory from '../components/BrandStory'
 import CleaningGame from '../components/CleaningGame'
 import FranchiseForm from '../components/FranchiseForm'
+import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import Seo from '../components/seo'
 import '../css/global.css'
@@ -40,6 +41,7 @@ const IndexPage = ({ data, pageContext }) => {
       <Benefits home={home} />
       <BrandStory home={home} />
       <CleaningGame />
+      <ContactForm />
       <FranchiseForm />
       <Footer home={home} />
     </div>

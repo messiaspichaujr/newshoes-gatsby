@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { Send, Mail, MessageCircle, Clock } from 'lucide-react';
 
 const ContactForm = () => {
   const { t } = useTranslation();
@@ -16,20 +18,15 @@ const ContactForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!formData.nome || !formData.email || !formData.mensagem) {
       setError(t('contact.error.required'));
       return;
     }
-
     try {
       setLoading(true);
       console.log('Mensagem enviada:', formData);
@@ -44,118 +41,244 @@ const ContactForm = () => {
     }
   };
 
-  return (
-    <section style={{ padding: 'clamp(40px, 8vw, 80px) 20px', background: 'linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%)' }} id="sac">
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 6vw, 60px)' }}>
-          <h2 style={{ fontSize: 'clamp(24px, 5vw, 42px)', fontWeight: '700', color: '#000', margin: '0 0 10px 0' }}>{t('contact.title')}</h2>
-          <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#666', margin: '0' }}>{t('contact.subtitle')}</p>
-        </div>
+  const inputStyle = {
+    width: '100%',
+    padding: '14px 18px',
+    border: '1px solid rgba(0,0,0,0.08)',
+    borderRadius: '14px',
+    fontSize: '14px',
+    fontFamily: 'Inter, sans-serif',
+    background: '#fff',
+    outline: 'none',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+    color: '#000',
+  };
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '32px', alignItems: 'start' }}>
-          <form onSubmit={handleSubmit} style={{ background: 'white', padding: 'clamp(20px, 4vw, 40px)', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)' }}>
+  const labelStyle = {
+    fontWeight: '600',
+    marginBottom: '8px',
+    color: '#555',
+    fontSize: '13px',
+    fontFamily: 'Inter, sans-serif',
+    letterSpacing: '0.3px',
+  };
+
+  return (
+    <section
+      id="sac"
+      style={{
+        padding: 'clamp(60px, 10vw, 120px) 20px',
+        background: '#f5f5f5',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{ textAlign: 'center', marginBottom: 'clamp(32px, 6vw, 60px)' }}
+        >
+          <h2 style={{
+            fontFamily: "'StretchPro', sans-serif",
+            fontSize: 'clamp(24px, 5vw, 42px)',
+            color: '#000',
+            marginBottom: '12px',
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+          }}>
+            {t('contact.title')}
+          </h2>
+          <p style={{
+            fontSize: 'clamp(14px, 3vw, 18px)',
+            color: '#666',
+            fontFamily: 'Inter, sans-serif',
+            margin: 0,
+          }}>
+            {t('contact.subtitle')}
+          </p>
+        </motion.div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))',
+          gap: '32px',
+          alignItems: 'start',
+        }}>
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            style={{
+              background: '#fff',
+              padding: 'clamp(24px, 4vw, 40px)',
+              borderRadius: '24px',
+              border: '1px solid rgba(0,0,0,0.06)',
+              boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
+            }}
+          >
             {submitted && (
-              <div style={{ padding: '16px', borderRadius: '8px', marginBottom: '20px', fontWeight: '500', fontSize: '14px', background: '#d4edda', color: '#155724', border: '1px solid #c3e6cb' }}>
+              <div style={{
+                padding: '16px', borderRadius: '14px', marginBottom: '20px',
+                fontWeight: '500', fontSize: '14px', fontFamily: 'Inter, sans-serif',
+                background: 'rgba(28,170,217,0.1)', color: '#1CAAD9',
+                border: '1px solid rgba(28,170,217,0.2)',
+              }}>
                 {t('contact.success')}
               </div>
             )}
 
             {error && (
-              <div style={{ padding: '16px', borderRadius: '8px', marginBottom: '20px', fontWeight: '500', fontSize: '14px', background: '#f8d7da', color: '#721c24', border: '1px solid #f5c6cb' }}>
-                ❌ {error}
+              <div style={{
+                padding: '16px', borderRadius: '14px', marginBottom: '20px',
+                fontWeight: '500', fontSize: '14px', fontFamily: 'Inter, sans-serif',
+                background: 'rgba(220,38,38,0.1)', color: '#dc2626',
+                border: '1px solid rgba(220,38,38,0.2)',
+              }}>
+                {error}
               </div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '16px', marginBottom: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '16px', marginBottom: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="nome" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.name')} *</label>
-                <input
-                  type="text" id="nome" name="nome" value={formData.nome}
+                <label htmlFor="nome" style={labelStyle}>{t('contact.field.name')} *</label>
+                <input type="text" id="nome" name="nome" value={formData.nome}
                   onChange={handleInputChange} placeholder={t('contact.placeholder.name')}
-                  required disabled={loading}
-                  style={{ padding: '12px 16px', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '14px', transition: 'all 0.3s ease', background: '#fafafa' }}
-                />
+                  required disabled={loading} style={inputStyle} />
               </div>
-
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="email" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.email')} *</label>
-                <input
-                  type="email" id="email" name="email" value={formData.email}
+                <label htmlFor="email" style={labelStyle}>{t('contact.field.email')} *</label>
+                <input type="email" id="email" name="email" value={formData.email}
                   onChange={handleInputChange} placeholder={t('contact.placeholder.email')}
-                  required disabled={loading}
-                  style={{ padding: '12px 16px', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '14px', transition: 'all 0.3s ease', background: '#fafafa' }}
-                />
+                  required disabled={loading} style={inputStyle} />
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '16px', marginBottom: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '16px', marginBottom: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="telefone" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.phone')}</label>
-                <input
-                  type="tel" id="telefone" name="telefone" value={formData.telefone}
+                <label htmlFor="telefone" style={labelStyle}>{t('contact.field.phone')}</label>
+                <input type="tel" id="telefone" name="telefone" value={formData.telefone}
                   onChange={handleInputChange} placeholder={t('contact.placeholder.phone')}
-                  disabled={loading}
-                  style={{ padding: '12px 16px', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '14px', transition: 'all 0.3s ease', background: '#fafafa' }}
-                />
+                  disabled={loading} style={inputStyle} />
               </div>
-
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="assunto" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.subject')}</label>
-                <input
-                  type="text" id="assunto" name="assunto" value={formData.assunto}
+                <label htmlFor="assunto" style={labelStyle}>{t('contact.field.subject')}</label>
+                <input type="text" id="assunto" name="assunto" value={formData.assunto}
                   onChange={handleInputChange} placeholder={t('contact.placeholder.subject')}
-                  disabled={loading}
-                  style={{ padding: '12px 16px', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '14px', transition: 'all 0.3s ease', background: '#fafafa' }}
-                />
+                  disabled={loading} style={inputStyle} />
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label htmlFor="mensagem" style={{ fontWeight: '600', marginBottom: '8px', color: '#333', fontSize: '14px' }}>{t('contact.field.message')} *</label>
-              <textarea
-                id="mensagem" name="mensagem" value={formData.mensagem}
+            <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
+              <label htmlFor="mensagem" style={labelStyle}>{t('contact.field.message')} *</label>
+              <textarea id="mensagem" name="mensagem" value={formData.mensagem}
                 onChange={handleInputChange} placeholder={t('contact.placeholder.message')}
-                rows="6" required disabled={loading}
-                style={{ padding: '12px 16px', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '14px', transition: 'all 0.3s ease', background: '#fafafa', fontFamily: 'inherit', resize: 'vertical' }}
-              />
+                rows="5" required disabled={loading}
+                style={{ ...inputStyle, resize: 'vertical', fontFamily: 'Inter, sans-serif' }} />
             </div>
 
-            <button
+            <motion.button
               type="submit" disabled={loading}
-              style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', border: 'none', borderRadius: '8px', fontWeight: '600', fontSize: '15px', cursor: loading ? 'not-allowed' : 'pointer', transition: 'all 0.3s ease', marginTop: '10px', opacity: loading ? 0.6 : 1 }}
+              whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(28,170,217,0.3)' }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                width: '100%', padding: '16px',
+                background: '#1CAAD9', color: '#fff',
+                border: 'none', borderRadius: '14px',
+                fontWeight: '700', fontSize: '14px',
+                fontFamily: 'Inter, sans-serif',
+                letterSpacing: '1px', textTransform: 'uppercase',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+                opacity: loading ? 0.6 : 1,
+              }}
             >
+              <Send size={18} />
               {loading ? t('contact.sending') : t('contact.submit')}
-            </button>
-          </form>
+            </motion.button>
+          </motion.form>
 
-          <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: 'clamp(20px, 4vw, 40px)', borderRadius: '16px', color: 'white' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: '700', margin: '0 0 30px 0' }}>{t('contact.side.title')}</h3>
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
-              <span style={{ fontSize: '28px', minWidth: '40px', textAlign: 'center' }}>📧</span>
-              <div>
-                <strong style={{ display: 'block', fontWeight: '600', fontSize: '14px', marginBottom: '5px' }}>{t('contact.side.email_label')}</strong>
-                <p style={{ margin: '0', fontSize: '14px', opacity: 0.95, lineHeight: 1.5 }}>
-                  <a href="mailto:contato@newshoes.com.br" style={{ color: 'white', textDecoration: 'none', fontWeight: '500' }}>contato@newshoes.com.br</a>
-                </p>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            style={{
+              background: '#000',
+              padding: 'clamp(24px, 4vw, 40px)',
+              borderRadius: '24px',
+              color: '#fff',
+            }}
+          >
+            <h3 style={{
+              fontFamily: "'StretchPro', sans-serif",
+              fontSize: 'clamp(18px, 3vw, 24px)',
+              margin: '0 0 32px 0',
+              letterSpacing: '1px',
+            }}>
+              {t('contact.side.title')}
+            </h3>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '44px', height: '44px', borderRadius: '14px',
+                  background: 'rgba(28,170,217,0.15)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <Mail size={20} color="#1CAAD9" />
+                </div>
+                <div>
+                  <strong style={{ display: 'block', fontWeight: '600', fontSize: '13px', marginBottom: '4px', fontFamily: 'Inter, sans-serif', letterSpacing: '0.3px', color: 'rgba(255,255,255,0.5)' }}>
+                    {t('contact.side.email_label')}
+                  </strong>
+                  <a href="mailto:contato@newshoes.com.br" style={{ color: '#fff', textDecoration: 'none', fontWeight: '500', fontSize: '14px', fontFamily: 'Inter, sans-serif' }}>
+                    contato@newshoes.com.br
+                  </a>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '44px', height: '44px', borderRadius: '14px',
+                  background: 'rgba(28,170,217,0.15)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <MessageCircle size={20} color="#1CAAD9" />
+                </div>
+                <div>
+                  <strong style={{ display: 'block', fontWeight: '600', fontSize: '13px', marginBottom: '4px', fontFamily: 'Inter, sans-serif', letterSpacing: '0.3px', color: 'rgba(255,255,255,0.5)' }}>
+                    {t('contact.side.whatsapp_label')}
+                  </strong>
+                  <a href="https://wa.me/5547991180109" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none', fontWeight: '500', fontSize: '14px', fontFamily: 'Inter, sans-serif' }}>
+                    (47) 99118-0109
+                  </a>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: '44px', height: '44px', borderRadius: '14px',
+                  background: 'rgba(28,170,217,0.15)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <Clock size={20} color="#1CAAD9" />
+                </div>
+                <div>
+                  <strong style={{ display: 'block', fontWeight: '600', fontSize: '13px', marginBottom: '4px', fontFamily: 'Inter, sans-serif', letterSpacing: '0.3px', color: 'rgba(255,255,255,0.5)' }}>
+                    {t('contact.side.hours_label')}
+                  </strong>
+                  <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6, fontFamily: 'Inter, sans-serif', color: 'rgba(255,255,255,0.85)' }}>
+                    {t('contact.side.hours')}
+                  </p>
+                </div>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
-              <span style={{ fontSize: '28px', minWidth: '40px', textAlign: 'center' }}>💬</span>
-              <div>
-                <strong style={{ display: 'block', fontWeight: '600', fontSize: '14px', marginBottom: '5px' }}>{t('contact.side.whatsapp_label')}</strong>
-                <p style={{ margin: '0', fontSize: '14px', opacity: 0.95, lineHeight: 1.5 }}>
-                  <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" style={{ color: 'white', textDecoration: 'none', fontWeight: '500' }}>(11) 99999-9999</a>
-                </p>
-              </div>
-            </div>
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '0' }}>
-              <span style={{ fontSize: '28px', minWidth: '40px', textAlign: 'center' }}>🕐</span>
-              <div>
-                <strong style={{ display: 'block', fontWeight: '600', fontSize: '14px', marginBottom: '5px' }}>{t('contact.side.hours_label')}</strong>
-                <p style={{ margin: '0', fontSize: '14px', opacity: 0.95, lineHeight: 1.5 }}>{t('contact.side.hours')}</p>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
