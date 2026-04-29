@@ -310,7 +310,6 @@ const CleaningGame = () => {
         )}
       </motion.div>
 
-      {/* Thumbnail selector */}
       <div style={{
         display: 'flex',
         justifyContent: 'center',

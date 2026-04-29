@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 import { MapPin, Phone, Instagram, Facebook, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Seo from '../components/seo'
+import imgBeforeAfter from '../assets/tenis-antes-e-depois.png'
 import '../css/global.css'
 import '../css/BubbleMenu.css'
 
@@ -141,25 +143,6 @@ const UnidadePage = ({ data }) => {
             }}>
               {u.nome}
             </h1>
-            {whatsappHref && (
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '10px',
-                  backgroundColor: '#25D366', color: '#fff',
-                  padding: '16px 32px', borderRadius: '50px',
-                  fontWeight: '600', fontSize: '15px', fontFamily: 'Inter, sans-serif',
-                  textDecoration: 'none', transition: 'opacity 0.2s',
-                  boxShadow: '0 4px 20px rgba(37,211,102,0.4)',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = '0.9')}
-                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-              >
-                <WhatsAppIcon /> {t('unidade.cta')}
-              </a>
-            )}
           </div>
 
           {/* Right: store photo */}
@@ -196,6 +179,101 @@ const UnidadePage = ({ data }) => {
               </div>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* CTA Antes / Depois */}
+      <section style={{
+        background: '#fff',
+        padding: 'clamp(60px, 10vw, 100px) 20px',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          maxWidth: '1100px',
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'clamp(30px, 6vw, 60px)',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+        }}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            style={{ flex: '1 1 400px', maxWidth: '550px' }}
+          >
+            <h2 style={{
+              fontFamily: "'StretchPro', sans-serif",
+              fontSize: 'clamp(20px, 4vw, 32px)',
+              color: '#000',
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              marginBottom: '8px',
+              lineHeight: 1.2,
+            }}>
+              {t('cleaning.title_prefix')}{' '}
+              <span style={{ color: '#1CAAD9' }}>{t('cleaning.title_highlight_cta')}</span>
+            </h2>
+            <h3 style={{
+              fontFamily: "'StretchPro', sans-serif",
+              fontSize: 'clamp(18px, 3.5vw, 28px)',
+              color: '#000',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              marginBottom: '20px',
+              lineHeight: 1.3,
+            }}>
+              {t('cleaning.subtitle_cta')}
+            </h3>
+            <p style={{
+              fontSize: 'clamp(14px, 2.5vw, 18px)',
+              color: '#555',
+              fontFamily: 'Inter, sans-serif',
+              lineHeight: 1.7,
+              marginBottom: '32px',
+            }}>
+              {t('cleaning.description_cta')}
+            </p>
+            {whatsappHref && (
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '10px',
+                  backgroundColor: '#25D366', color: '#fff',
+                  padding: '16px 40px', borderRadius: '50px',
+                  fontWeight: '700', fontSize: '14px', fontFamily: 'Inter, sans-serif',
+                  textDecoration: 'none', letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                  boxShadow: '0 4px 20px rgba(37,211,102,0.4)',
+                  transition: 'opacity 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = '0.9')}
+                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+              >
+                <WhatsAppIcon /> {t('cleaning.cta_button')}
+              </a>
+            )}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            style={{ flex: '1 1 350px', maxWidth: '500px' }}
+          >
+            <img
+              src={imgBeforeAfter}
+              alt="Antes e depois"
+              style={{
+                width: '100%',
+                borderRadius: '24px',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.12)',
+              }}
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -369,9 +447,6 @@ const UnidadePage = ({ data }) => {
             </div>
           </div>
 
-          {/* CTA after services */}
-          {whatsappHref && <CtaButton href={whatsappHref} label={t('unidade.cta')} />}
-
           {/* ── Small repairs ── */}
           <SectionTitle style={{ marginTop: '60px' }}>{t('unidade.repairs.title')}</SectionTitle>
 
@@ -411,9 +486,6 @@ const UnidadePage = ({ data }) => {
               </span>
             ))}
           </div>
-
-          {/* Final CTA */}
-          {whatsappHref && <CtaButton href={whatsappHref} label={t('unidade.cta')} />}
 
         </div>
       </section>
